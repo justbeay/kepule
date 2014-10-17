@@ -1,0 +1,74 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>贷款支用申请</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">贷款名称</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">A名</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">贷款名称</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" formname="form" placeholder="贷款名称">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">贷款用途</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">B途</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">贷款期限</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select">
+									<option>14天</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">还款方式</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select">
+									<option>一次性还本付息</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submit()" formname="form">提  交</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

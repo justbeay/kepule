@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html id="ng-app">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width,minimum-scale=0.1,maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <title>网贷</title>
+
+    <link rel="stylesheet" type="text/css" href="themes/default/css/kepule.css"/>
+    <link rel="stylesheet" type="text/css" href="themes/default/css/base.css"/>
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="themes/default/css/kepule_ie7_fix.css"/>
+    <![endif]-->
+</head>
+<body ng-controller="BaseCtrl">
+	<div class="header">
+	    <div class="container">
+	        <div class="nav-header">
+	        	<ul class="navbar">
+	                <div class="home" ng-click="locate('#/welcome')"></div>
+	                <li ng-click="locate('#/applyLoan')">我要借款</li>
+	                <li ng-click="locate('#/loanList')">我的贷款</li>
+	            </ul>
+	            <ul class="navbar-right">
+	                <li>注册</li>
+	                <li>登录</li>
+	            </ul>
+	        </div>
+	    </div>
+	</div>
+	<div class="content" ng-view></div>
+	<div class="footer">
+	    <div class="container">
+	        <div class="footer-content">
+	            please mail to <a href="mailto:csii_shaoyh@spdbdv.com?subject=kepule&">@csii_shaoyh</a> if any problems 
+	        </div>
+	    </div>
+	</div>
+	<div class="navUp"></div>
+ 	<!-- <iframe id="loadingFrame" name="loading" src="loading.html" frameborder="0" scrolling="no"></iframe> -->
+ </body>
+
+<script data-main="js/app.js" src="js/require.min.js"></script>
+
+</html>

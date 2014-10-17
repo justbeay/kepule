@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html style="background: transparent">
+  <head>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+  	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Pragma" content="no-cache">
+  	<meta name="viewport" content="width=device-width,minimum-scale=0.1,maximum-scale=1.0"/>
+  	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+  	<title></title>
+	
+    <link rel="stylesheet" type="text/css" href="themes/default/css/base.css"/>
+    
+  </head>
+  	<body>
+		<div id="loading">
+			<div class="loadingBg"></div>
+			<div class="loadingInfo">加载中，请稍候</div>
+		</div>
+	</div>
+  </body>
+  <script src="js/spin.js"></script>
+  <script>
+	function initSpin() {
+		var spin = {};
+		var opts = {
+			lines : 12, // The number of lines to draw
+			length : 12, // The length of each line
+			width : 5, // The line thickness
+			radius : 20, // The radius of the inner circle
+			corners : 1, // Corner roundness (0..1)
+			rotate : 0, // The rotation offset
+			direction : 1, // 1: clockwise, -1: counterclockwise
+			color : '#000', // #rgb or #rrggbb or array of colors
+			speed : 1, // Rounds per second
+			trail : 100, // Afterglow percentage
+			shadow : true, // Whether to render a shadow
+			hwaccel : false, // Whether to use hardware acceleration
+			className : 'spinner', // The CSS class to assign to the spinner
+			zIndex : 2e9, // The z-index (defaults to 2000000000)
+			top : '-57px', // Top position relative to parent in px
+			left : '-37px' // Left position relative to parent in px
+		};
+		new Spinner(opts).spin(document.getElementById("loading"));
+	};
+	initSpin();
+  </script>
+</html>
