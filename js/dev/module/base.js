@@ -81,7 +81,7 @@ define(["angular", "config", "service", "component"], function(angular) {
 			return $remote.post(action,formData,function(data) {
 	            data = $transLate(data);
 	            callBack && callBack(data);
-	        },callBack,function(data) {
+	        },failBack,function(data) {
 				alert("与服务器连接失败");
 			});
 	    };

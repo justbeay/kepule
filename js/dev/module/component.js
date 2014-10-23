@@ -260,7 +260,7 @@ define(["angular"], function(angular) {
 	  };
 	}])
 
-	.directive("ngChk", function($compile) {
+	.directive("ngChk", ["$compile", function($compile) {
 		return {
 			priority: -1000,
 			link: function(scope, element, attrs) {
@@ -331,7 +331,7 @@ define(["angular"], function(angular) {
 				element.after($compile($html)(scope));
 			}
 		};
-	})
+	}])
 
 	.directive("ngSub", function() {
 		return function(scope, element, attrs) {
@@ -398,174 +398,6 @@ define(["angular"], function(angular) {
 			}
 		};
 	}])
-
-	.directive('ngPg', function($compile) {
-			return function compile(scope, element, attr) {
-			var ANIMATE = element.attr('Animate')||element.attr('animate');
-		    var PAGE_NAME=element.attr('PageName')||element.attr('pageName')||element.attr('pagename')||'PAGE';
-		    var PAGE_SIZE=element.attr('PageSize')||element.attr('pageSize')||element.attr('pagesize')||5;
-		    var PAGE_ATTR=element.attr('ng-pg');
-		    var LIST_NAME=PAGE_ATTR.match(/in\s*(\w*)$/)[1];
-		    var CACHE_NAME = element.attr('CacheName');
-		    var TOTALNO = element.attr("TotalNo");
-		    element.removeAttr('ng-pg');
-		    element.attr('ng-repeat',PAGE_ATTR.replace(/in\s*(\w*)$/,'in '+ PAGE_NAME+'.CurrentList'));
-		    var currentPageDiv=element;
-			while(currentPageDiv.attr("page") == null){
-			      currentPageDiv=currentPageDiv.parent();
-			}
-			var PAGE_DIV_ID=currentPageDiv.attr("id"); 
-			
-			var clone = element.clone();
-		    $compile(clone)(scope);
-		    var parent = element.parent();
-		    parent.find("[ng-repeat='" + PAGE_ATTR.replace(/in\s*(\w*)$/,'in '+ PAGE_NAME+'.CurrentList') + "']").remove();
-		    parent.append(clone);
-		    
-		    function initPage() {
-		    	var watch1 = scope.$watch(LIST_NAME,function(list){
-	     			if(!scope[PAGE_NAME]){
-	     				scope[PAGE_NAME]={};
-	     				scope[PAGE_NAME].clearWatch = function() {
-	    	    			watch1 && watch1();
-	    	    			watch2 && watch2();
-	    	    		}
-	     				scope[PAGE_NAME].CurrentPage = 1;
-	     				scope[PAGE_NAME].PageSize = PAGE_SIZE;
-	     				scope[PAGE_NAME].CurrentList = [];
-	     				scope[PAGE_NAME].beginNumber = 1;
-	     				scope[PAGE_NAME].Flag = "default";
-	     				scope[PAGE_NAME].TotalNo = scope[TOTALNO];
-	     				scope[PAGE_NAME].LastPage=false;
-	     				if (scope[PAGE_NAME].TotalNo) {
-	     					scope[PAGE_NAME].PageNumber=parseInt((scope[PAGE_NAME].TotalNo-1)/scope[PAGE_NAME].PageSize+1);
-	     				}
-	     				
-	     				if(scope[LIST_NAME]){
-	     					scope[PAGE_NAME].CurrentList=scope[LIST_NAME].slice(0,scope[PAGE_NAME].PageSize);
-	     					scope[CACHE_NAME] = null;
-	     				}
-	     				
-	     				 scope[PAGE_NAME].PageClass = [];
-	    		         for (var i = 0; i < scope[PAGE_NAME].PageNumber; i++) {
-	    		        	 scope[PAGE_NAME].PageClass.push({"class": ""});
-	    		         }
-	    		         if (scope[PAGE_NAME].PageClass.length) {
-	    		        	 scope[PAGE_NAME].PageClass[scope[PAGE_NAME].CurrentPage-1]["class"] = "true";
-	    		         }
-	    		        
-	     				scope[PAGE_NAME].prevPage = function() {
-	     					scope[PAGE_NAME].Flag = "prev";
-	     			    	if(scope[PAGE_NAME].CurrentPage <= 1){
-	     			    		alert("已经是第一页");
-	     		    		}else{
-	     		    			var begin = parseInt(scope[PAGE_NAME].beginNumber) - parseInt(scope[PAGE_NAME].PageSize);
-	     		    			scope[attr.act].call(scope, begin, scope[PAGE_NAME].PageSize);
-	     		    			scope[PAGE_NAME].LastPage=false;
-	     		    		}
-	     			    };
-	     			    scope[PAGE_NAME].nextPage = function() {
-	     			    	scope[PAGE_NAME].Flag = "next";
-	     			    	if(scope[PAGE_NAME].CurrentList.length < scope[PAGE_NAME].PageSize){
-	     			    		alert("已经是末页");
-	     			    		scope[PAGE_NAME].LastPage=true;
-	     			    	}else{
-	     			    		var begin = parseInt(scope[PAGE_NAME].beginNumber) + parseInt(scope[PAGE_NAME].PageSize);
-	     			    		if (scope[PAGE_NAME].PageNumber) {
-	     			    			if (scope[PAGE_NAME].PageNumber == scope[PAGE_NAME].CurrentPage) {
-	     			    				alert("已经是末页");
-	     			    				scope[PAGE_NAME].LastPage=true;
-	     			    			} else {
-	     			    				if(scope[LIST_NAME].length==0){
-		     			    				scope[PAGE_NAME].LastPage=true;
-		     			    				alert("已经是末页");
-		     			    			}
-	     			    				if(!scope[PAGE_NAME].LastPage){
-	     			    				scope[attr.act].call(scope, begin, scope[PAGE_NAME].PageSize);
-	     			    			}
-	     			    			}
-	     			    		} else {
-	     			    			if(scope[LIST_NAME].length==0){
-	     			    				scope[PAGE_NAME].LastPage=true;
-	     			    				alert("已经是末页");
-	     			    			}
-	     			    			if(!scope[PAGE_NAME].LastPage){
-	     			    			scope[attr.act].call(scope, begin, scope[PAGE_NAME].PageSize);
-	     			    		}
-	     			    	}
-	     			    	}
-	     			    };
-	     			    
-	     			   scope[PAGE_NAME].changePage=function(toPage){
-	     				  scope[PAGE_NAME].Flag = "default";
-	     				  scope[PAGE_NAME].toPage = toPage;
-	     				  var begin = (toPage-1)*scope[PAGE_NAME].PageSize+1;
-	     				  scope[attr.act].call(scope, begin, scope[PAGE_NAME].PageSize);
-	    		       };
-	     			}else{
-	     				if(scope[LIST_NAME]){
-	     					if(scope[PAGE_NAME].Flag=="default"){
-	     						scope[PAGE_NAME].CurrentList=scope[LIST_NAME].slice(0,scope[PAGE_NAME].PageSize);
-	     						scope[CACHE_NAME] = null;
-	     					}
-	     					if(scope[LIST_NAME].length>0){
-	     						scope[PAGE_NAME].CurrentList=scope[LIST_NAME].slice(0,scope[PAGE_NAME].PageSize);
-	     						scope[CACHE_NAME] = null;
-
-	     						if(scope[PAGE_NAME].Flag=="default"){
-	     							if (scope[PAGE_NAME].TotalNo) {
-	     								if (scope[PAGE_NAME].toPage) {
-	     									scope[PAGE_NAME].beginNumber = (scope[PAGE_NAME].toPage-1)*scope[PAGE_NAME].PageSize+1;
-	     									scope[PAGE_NAME].CurrentPage = scope[PAGE_NAME].toPage;
-	     								}
-	     							}
-	     						}
-	     						if(scope[PAGE_NAME].Flag=="prev"){
-	     							scope[PAGE_NAME].beginNumber = parseInt(scope[PAGE_NAME].beginNumber) - parseInt(scope[PAGE_NAME].PageSize);
-	    	 						scope[PAGE_NAME].CurrentPage = scope[PAGE_NAME].CurrentPage - 1;
-	    	 					}else if(scope[PAGE_NAME].Flag=="next"){
-	    	 						scope[PAGE_NAME].beginNumber = parseInt(scope[PAGE_NAME].beginNumber) + parseInt(scope[PAGE_NAME].PageSize);
-	    	 						scope[PAGE_NAME].CurrentPage = scope[PAGE_NAME].CurrentPage + 1;
-	    	 					}
-	     						if(scope[PAGE_NAME].CurrentList.length < scope[PAGE_NAME].PageSize){
-	     				    		scope[PAGE_NAME].LastPage=true;
-	     						 }
-	     						else{
-	     							scope[PAGE_NAME].LastPage=false;
-	     						}
-	     					}
-	     					
-	     				}
-	     			}
-	    	    });
-		    } 
-		    
-		    if (TOTALNO) {
-		    	var watch2 = scope.$watch(TOTALNO, function(tNo) {
-			    	if (tNo) {
-			    		if (!scope[PAGE_NAME]) {
-			    			initPage();
-			    		} else {
-			    			scope[PAGE_NAME].TotalNo = scope[TOTALNO];
-		     				if (scope[PAGE_NAME].TotalNo) {
-		     					scope[PAGE_NAME].PageNumber=parseInt((scope[PAGE_NAME].TotalNo-1)/scope[PAGE_NAME].PageSize+1);
-		     				}
-		     				scope[PAGE_NAME].PageClass = [];
-		    		         for (var i = 0; i < scope[PAGE_NAME].PageNumber; i++) {
-		    		        	 scope[PAGE_NAME].PageClass.push({"class": ""});
-		    		         }
-		    		         if (scope[PAGE_NAME].PageClass.length) {
-		    		        	 scope[PAGE_NAME].PageClass[scope[PAGE_NAME].CurrentPage-1]["class"] = "true";
-		    		         }
-			    		}
-			    	} 
-			    });
-		    } else {
-		    	initPage();
-		    }
-		};
-	})
-	
 	;
 });
 

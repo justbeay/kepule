@@ -46,7 +46,7 @@ define(["angular", "config"], function(angular) {
 		};
 	})
 	
-	.factory("$remote", function($config, $http) {
+	.factory("$remote", ["$config", "$http", function($config, $http) {
 		/** 返回校验 **/
 		function returnCheck(data) {
 			data = data || {};
@@ -111,5 +111,5 @@ define(["angular", "config"], function(angular) {
 			post: post,
 			get: get
 		};
-	})
+	}])
 });
