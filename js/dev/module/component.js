@@ -441,7 +441,6 @@ define(["angular"], function(angular) {
                 $scope.indicator[ind] = false;
             });
             $scope.indicator[$scope.indicator.current] = true;
-            console.log($scope.indicator)
         };
 
         $scope.prev = self.prev = function() {
@@ -478,6 +477,7 @@ define(["angular"], function(angular) {
             }
             timeout = setInterval(function() {
                 self.next();
+                $scope.$apply();
             }, inter);
         };
 
