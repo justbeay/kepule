@@ -155,8 +155,6 @@ p {
     bottom: 15px;
 }
 .carousel {
-    width: 990px;
-    height: 275px;
     overflow:hidden;
     margin-bottom: 20px;
 }
@@ -191,6 +189,36 @@ p {
 	right: 15px;
 	left: auto;
 	background: url('./images/rightArr_true.png');
+}
+.indicator-wrapper {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.indicator {
+    float: left;
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 300;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #4DADF7;
+    background: #fff;
+}
+.indicator.active {
+    color: #fff;
+    background-color: #4DADF7;
+    cursor: default;
+}
+.indicator.active:hover, .indicator.active:focus {
+    color: #fff;
+    background-color: #4DADF7;
+    cursor: default;
+}
+.indicator:hover, indicator:focus {
+    color: #4DADF7;
+    background-color: #eee;
+    cursor: default;
 }
 .thumbnail {
 	padding: 4px 10px;

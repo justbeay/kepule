@@ -398,6 +398,124 @@ define(["angular"], function(angular) {
 			}
 		};
 	}])
+
+    .controller('ngCarouselController', ["$scope", function ($scope) {
+        var self = this,
+            slides = self.slides = [],
+            timeout, inter;
+        slides.current = 0;
+        $scope.indicator = [];
+        $scope.indicator.current = 0;
+
+        self.addSlide = function(slide) {
+            slides.push(slide);
+            $scope.indicator.push(false);
+            $scope.indicator[0] = true;
+        };
+
+        var flag = true;
+
+        $scope.next = self.next = function() {
+            if (!flag) {
+                return;
+            }
+            flag = false;
+
+            var slide = $(slides[slides.current]);
+            if (slides.current+1 == slides.length) {
+                slide.after(slides[0]);
+                slides.current--;
+                slide.parent().css("margin-left", "-" + (slides.current)*slide.width() + "px");
+                slides.push(slides.shift());
+            }
+            slide.parent().animate({
+                "margin-left": "-" + (slides.current+1)*slide.width() + "px"
+            }, 3000, function() {
+                flag = true;
+            });
+
+            slides.current++;
+
+            $scope.indicator.current = ++$scope.indicator.current % $scope.indicator.length;
+            angular.forEach($scope.indicator, function(each, ind) {
+                $scope.indicator[ind] = false;
+            });
+            $scope.indicator[$scope.indicator.current] = true;
+            console.log($scope.indicator)
+        };
+
+        $scope.prev = self.prev = function() {
+            if (!flag) {
+                return;
+            }
+            flag = false;
+
+            var slide = $(slides[slides.current]);
+            if (!slides.current) {
+                slide.before(slides[slides.length-1]);
+                slides.current++;
+                slide.parent().css("margin-left", "-" + (slides.current)*slide.width() + "px");
+                slides.unshift(slides.pop());
+            }
+            slide.parent().animate({
+                "margin-left": "-" + (slides.current-1)*slide.width() + "px"
+            }, 3000, function() {
+                flag = true;
+            });
+
+            slides.current--;
+
+            $scope.indicator.current = --$scope.indicator.current < 0? $scope.indicator.current + $scope.indicator.length: $scope.indicator.current;
+            angular.forEach($scope.indicator, function(each, ind) {
+                $scope.indicator[ind] = false;
+            });
+            $scope.indicator[$scope.indicator.current] = true;
+        };
+
+        $scope.play = self.play = function(interval) {
+            if (interval) {
+                inter = interval;
+            }
+            timeout = setInterval(function() {
+                self.next();
+            }, inter);
+        };
+
+        $scope.pause = self.pause = function() {
+            clearInterval(timeout);
+        };
+
+        $scope.slides = function() {
+            return slides;
+        };
+
+    }])
+    .directive('ngCarousel', function() {
+        return {
+            transclude: true,
+            replace: true,
+            controller: 'ngCarouselController',
+            template: "<div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\">\n" +
+                "    <div class=\"carousel-inner\" ng-transclude></div>\n" +
+                "    <div ng-click=\"prev()\" class=\"carousel-control slideleft\" ng-show=\"slides().length > 1\"></div>\n" +
+                "    <div ng-click=\"next()\" class=\"carousel-control slideright\" ng-show=\"slides().length > 1\"></div>\n" +
+                "    <div class=\"indicator-wrapper\">\n" +
+                "       <div class=\"indicator\" ng-class=\"{active: item}\" ng-repeat=\"item in indicator\">{{$index+1}}</div>\n" +
+                "    <div>\n" +
+                "</div>\n",
+            scope: {
+                interval: '='
+            },
+            link: function(scope, element, attrs, ctrl) {
+                element.find("[ng-slide]").each(function(ind, val) {
+                    ctrl.addSlide(this);
+                    $(this).css("float", "left");
+                });
+
+                ctrl.play(scope.interval);
+            }
+        };
+    })
 	;
 });
 

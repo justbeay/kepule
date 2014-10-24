@@ -6,12 +6,12 @@
 	
 	require.config({
 	    baseUrl: "js/" + mode,
-	    shim: {
-  　　　　　　angular: {
-	  			deps: ["jquery"],
-  　　　　　　　　exports: "angular"
-  　　　　　　}
-  　　　  },
+        shim: {
+            angular: {
+                exports: "angular",
+                deps: ["jquery"]
+            }
+        },
 		paths: {
 			/**
 			 * lib
