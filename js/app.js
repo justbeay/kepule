@@ -10,19 +10,23 @@
             angular: {
                 exports: "angular",
                 deps: ["jquery"]
+            },
+            "angular-route": {
+                deps: ["angular"]
             }
         },
 		paths: {
 			/**
 			 * lib
 			 */
-			es5: "lib/es5-shim.min",
-			json3: "lib/json3.min",
-			spin: "lib/spin",
-			jquery: "lib/jquery-1.11.1.min",
-			angular: "lib/angular.min",
+			es5: "lib/es5/es5-shim.min",
+			json3: "lib/json3/lib/json3.min",
+			spin: "lib/spin/spin",
+			jquery: "lib/jquery/jquery.min",
+			angular: "lib/angular/angular.min",
+            "angular-route": "lib/angular-route/angular-route.min",
 			/**
-			 * module
+			 * angular module
 			 */
 			base: "module/base",
 			component: "module/component",

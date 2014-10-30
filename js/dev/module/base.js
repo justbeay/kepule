@@ -1,4 +1,4 @@
-define(["angular", "config", "service", "component"], function(angular) {
+define(["angular", "angular-route", "config", "service", "component"], function(angular) {
 	return angular.module('ngView', ["ngConfig", "ngService", "ngComponent"])
 
 	.config(

@@ -15,9 +15,10 @@ backup/
 node_modules/
 test/
 json/
-static/bower_components/
-static/cdn/
 
 npm-debug.log
 .DS_Store
 .idea/
+
+js/dev/lib
+js/pro
