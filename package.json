@@ -1,7 +1,7 @@
 {
-    "name": "demo",
+    "name": "kepule",
     "version": "0.0.1",
-    "description": "grunt demo",
+    "description": "kepule",
     "dependencies": {
 		"grunt": "~0.4.2",
 		"grunt-contrib-uglify": "*",

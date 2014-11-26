@@ -17,6 +17,7 @@
         "tests"
     ],
     "dependencies": {
+        "jquery": "https://github.com/jquery/jquery.git",
         "angular": "https://github.com/angular/bower-angular.git#1.3",
         "angular-route": "https://github.com/angular/bower-angular-route.git#1.3",
         "spin": "https://github.com/fgnass/spin.js.git",

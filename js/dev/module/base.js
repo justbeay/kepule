@@ -1,36 +1,36 @@
 define(["angular", "angular-route", "config", "service", "component"], function(angular) {
-	return angular.module('ngView', ["ngConfig", "ngService", "ngComponent"])
+	return angular.module('ngView', ["ngRoute", "ngConfig","ngService", "ngComponent"])
 
 	.config(
-	    ["$routeProvider", "$httpProvider", "$controllerProvider",  function($routeProvider, $httpProvider, $controllerProvider) {
-		    var interceptor = ['$q', function($q) {
-		    	var $loading = $("#loadingFrame").contents().find("#loading");
-		    	function ajax_before() {
-		    		$("#loadingFrame").show();
-		    		$loading.show();
-	        	}
-		    	function ajax_after() {
-		    		$("#loadingFrame").hide();
-		    		$loading.hide();
-	        	}
-		    	
-		    	var promises;
-				return function(promise) {
-					promises = $q.all(promises? [promise].concat([promises]): [promise]);
-					ajax_before();
-					return promise.then(function(response) {
-						promises.then(function() {
-							ajax_after();
-						});
-						return response;
-					}, function(response) {
-						ajax_after();
-						return $q.reject(response);
-					});
-				};
-		    }];
-		    $httpProvider.responseInterceptors.push(interceptor);
-		    
+	    ["$routeProvider", "$httpProvider", "$controllerProvider", function($routeProvider, $httpProvider, $controllerProvider) {
+//		    var interceptor = ['$q', function($q) {
+//		    	var $loading = $("#loadingFrame").contents().find("#loading");
+//		    	function ajax_before() {
+//		    		$("#loadingFrame").show();
+//		    		$loading.show();
+//	        	}
+//		    	function ajax_after() {
+//		    		$("#loadingFrame").hide();
+//		    		$loading.hide();
+//	        	}
+//
+//		    	var promises;
+//				return function(promise) {
+//					promises = $q.all(promises? [promise].concat([promises]): [promise]);
+//					ajax_before();
+//					return promise.then(function(response) {
+//						promises.then(function() {
+//							ajax_after();
+//						});
+//						return response;
+//					}, function(response) {
+//						ajax_after();
+//						return $q.reject(response);
+//					});
+//				};
+//		    }];
+//		    $httpProvider.responseInterceptors.push();
+
 		    var lazyCtrl = function(ctrlName) {
 		    	return ["$q", "$rootScope", function($q, $rootScope) {
 					var deferred = $q.defer();
@@ -42,7 +42,7 @@ define(["angular", "angular-route", "config", "service", "component"], function(
 					return deferred.promise;
 				}];
 		    };
-		    
+
 		    $routeProvider.when("/welcome", {
 				templateUrl: "pages/welcome.html",
 				controller: "WelcomeCtrl"
@@ -76,7 +76,7 @@ define(["angular", "angular-route", "config", "service", "component"], function(
 	/** 初始化ngView对象，初始化定义$rootScope相关方法 **/
 	.run(['$rootScope', '$config', "$route", "$remote",
 	function($rootScope, $config, $route, $remote) {
-		
+
 		$rootScope.post2SRV = function(action,formData,callBack,failBack) {
 			return $remote.post(action,formData,function(data) {
 	            data = $transLate(data);
@@ -85,7 +85,7 @@ define(["angular", "angular-route", "config", "service", "component"], function(
 				alert("与服务器连接失败");
 			});
 	    };
-	    
+
 		/**页面跳转统一方法*/
 		var flag;
 		$rootScope.locate = function(url) {
@@ -99,7 +99,7 @@ define(["angular", "angular-route", "config", "service", "component"], function(
 	    		}
 	    	}, 1);
 	    };
-	    
+
 	    $rootScope.$on("$locationChangeStart", function(event, next, current) {
 	    	/*if (!flag) {
 	    		event.preventDefault();
@@ -115,7 +115,7 @@ define(["angular", "angular-route", "config", "service", "component"], function(
 
 	.controller("WelcomeCtrl", ["$scope", "$scopeData", function ($scope, $scopeData) {
 	}])
-	
+
 	;
 	
 });

@@ -22,7 +22,7 @@
 			es5: "lib/es5/es5-shim.min",
 			json3: "lib/json3/lib/json3.min",
 			spin: "lib/spin/spin",
-			jquery: "lib/jquery/jquery.min",
+			jquery: "lib/jquery/dist/jquery.min",
 			angular: "lib/angular/angular.min",
             "angular-route": "lib/angular-route/angular-route.min",
 			/**
@@ -40,7 +40,7 @@
 			loanNotes: "controller/applyLoan/loanNotes"
 		}
 	});
-	
+
 	require(["angular", "base"], function(angular, base) {
 		angular.bootstrap(document, ["ngView"]);
 	});

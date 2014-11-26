@@ -500,7 +500,7 @@ define(["angular"], function(angular) {
                 "    <div ng-click=\"prev()\" class=\"carousel-control slideleft\" ng-show=\"slides().length > 1\"></div>\n" +
                 "    <div ng-click=\"next()\" class=\"carousel-control slideright\" ng-show=\"slides().length > 1\"></div>\n" +
                 "    <div class=\"indicator-wrapper\">\n" +
-                "       <div class=\"indicator\" ng-class=\"{active: item}\" ng-repeat=\"item in indicator\">{{$index+1}}</div>\n" +
+                "       <div class=\"indicator\" ng-class=\"{active: item}\" ng-repeat=\"item in indicator track by $index\">{{$index+1}}</div>\n" +
                 "    <div>\n" +
                 "</div>\n",
             scope: {
