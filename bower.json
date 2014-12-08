@@ -20,8 +20,10 @@
         "jquery": "https://github.com/jquery/jquery.git",
         "angular": "https://github.com/angular/bower-angular.git#1.3",
         "angular-route": "https://github.com/angular/bower-angular-route.git#1.3",
+        "angular-cookies": "https://github.com/angular/bower-angular-cookies.git#1.3",
         "spin": "https://github.com/fgnass/spin.js.git",
         "es5": "https://github.com/es-shims/es5-shim.git",
-        "json3": "https://github.com/bestiejs/json3.git"
+        "json3": "https://github.com/bestiejs/json3.git",
+        "crypto": "https://github.com/evanvosberg/crypto-js.git"
     }
 }

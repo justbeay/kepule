@@ -1,0 +1,38 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>用户登录</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">用户名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" ng-returndown="submit()" formname="form" placeholder="用户名">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">密码</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="password" class="input-text" name="password" ng-model="password" ng-chk="checkPassword" ng-returndown="submit()" formname="form" placeholder="密码">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submit()" formname="form">登  录</div>
+						<div class="button" ng-click="back()" formname="form">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,104 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>用户信息</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">登录名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.loginId}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">姓名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.name}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">创建日期</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.createDate}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">用户状态</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.status}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">电子邮件</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.email}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">所属项目组</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.group}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">权限</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.role}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">岗位</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{user.position}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="edit()" formname="form">编  辑</div>
+						<div class="button" ng-click="back()" formname="form">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

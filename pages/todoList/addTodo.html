@@ -1,0 +1,73 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>新增任务</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">任务名称</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" formname="form" placeholder="任务名称">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">任务详情</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="description" ng-model="description" formname="form" placeholder="任务详情">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">创建人</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="creater" ng-model="creater" ng-chk="checkCreater" formname="form" placeholder="创建人">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">执行人</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="executor" ng-model="executor" ng-chk="checkExecutor" formname="form" placeholder="执行人">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">项目组</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="group" ng-model="group" ng-chk="checkGroup" formname="form">
+									<option ng-repeat="groupInfo in groupInfoList" value="{{groupInfo.id}}">{{groupInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submit()" formname="form">提  交</div>
+						<div class="button" ng-click="back()" formname="form">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

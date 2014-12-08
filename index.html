@@ -21,13 +21,14 @@
 	    <div class="container">
 	        <div class="nav-header">
 	        	<ul class="navbar">
-	                <div class="home" ng-click="locate('#/welcome')"></div>
-	                <li ng-click="locate('#/applyLoan')">我要借款</li>
-	                <li ng-click="locate('#/loanList')">我的贷款</li>
+	                <div class="home" ng-click="locate('#/todoList')"></div>
+	                <li ng-click="locate('#/todoList')">Todo</li>
+	                <li ng-click="locate('#/userList')">用户管理</li>
+	                <li ng-click="locate('#/groupList')">项目组管理</li>
 	            </ul>
 	            <ul class="navbar-right">
-	                <li>注册</li>
-	                <li>登录</li>
+	                <li ng-show="isLogin" ng-click="logout()">注销</li>
+	                <li ng-hide="isLogin" ng-click="locate('#/login')">登录</li>
 	            </ul>
 	        </div>
 	    </div>
@@ -40,7 +41,7 @@
 	        </div>
 	    </div>
 	</div>
-	<div class="navUp"></div>
+	<div class="navUp" ng-click="scrollTop()"></div>
  	<!-- <iframe id="loadingFrame" name="loading" src="loading.html" frameborder="0" scrolling="no"></iframe> -->
  </body>
 

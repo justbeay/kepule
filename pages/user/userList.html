@@ -1,0 +1,38 @@
+<div class="bodyer odd">
+	<div class="container">
+		<div>
+			<h1 class="float-left">用户列表</h1>
+			<div class="header-right">
+				<button class="button" ng-click="add()">新增用户</button>
+			</div>
+		</div>
+		<table>
+			<thead>
+			<tr>
+				<th>用户名</th>
+				<th>所属项目组</th>
+				<th>岗位</th>
+				<th>状态</th>
+				<th>权限</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tr ng-repeat="user in userList">
+				<td><a ng-click="view(user.loginId)">{{user.name}}</a></td>
+				<td>{{user.group}}</td>
+				<td>{{user.position}}</td>
+				<td>{{user.status}}</td>
+				<td>{{user.role}}</td>
+				<td><a ng-click="edit(user.loginId)">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(user.loginId)">删除</a></td>
+			</tr>
+		</table>
+		
+		<div class="nav-page">
+			<ul class="navbar">
+				<li class="prev" ng-click="searchPrevUserList()">&larr;上一页</li>
+				<li class="next" ng-click="searchNextUserList()">下一页&rarr;</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

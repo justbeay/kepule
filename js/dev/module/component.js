@@ -398,6 +398,29 @@ define(["angular"], function(angular) {
 			}
 		};
 	}])
+	.directive('ngReturndown', function() {
+		return function(scope,element,attrs) { 
+			element.bind('keypress', function(event){ 
+				if (event.keyCode != 13) return;
+				var inputCtrls = document[attrs.formname];
+				for (var i = 0; i < inputCtrls.length; i++) {
+					var ctrl = inputCtrls[i];
+					if (!ctrl.getAttribute("ng-chk")) {
+						continue;
+					}
+					var msg = scope[ctrl.getAttribute("ng-chk")].apply(scope);
+					if (msg && msg.flag == "error") {
+						ctrl.focus();
+						return;
+					}
+				}
+				if (element.hasClass("disabled") || element.hasClass("disabled2")) {
+					return;
+				}
+				scope.$apply(attrs.ngReturndown);
+			}); 
+		}
+	})
 
     .controller('ngCarouselController', ["$scope", function ($scope) {
         var self = this,

@@ -1,0 +1,38 @@
+<div class="bodyer odd">
+	<div class="container">
+		<div>
+			<h1 class="float-left">Todo List</h1>
+			<div class="header-right">
+				<button class="button" ng-click="search()">搜  索</button>
+				<button class="button" ng-click="add()" ng-show="isLogin">新增任务</button>
+			</div>
+		</div>
+		<table>
+			<thead>
+			<tr>
+				<th>任务名称</th>
+				<th>创建者</th>
+				<th>执行者</th>
+				<th>执行情况</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tr ng-repeat="todo in todoList">
+				<td ng-hide="isLogin">{{todo.name}}</td>
+				<td ng-show="isLogin"><a ng-click="view(todo.id)">{{todo.name}}</a></td>
+				<td>{{todo.creater}}</td>
+				<td>{{todo.executor}}</td>
+				<td>{{todo.done}}</td>
+				<td><a ng-click="edit(todo.id)" ng-show="isLogin">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(todo.id)" ng-show="isLogin">删除</a></td>
+			</tr>
+		</table>
+		
+		<div class="nav-page">
+			<ul class="navbar">
+				<li class="prev" ng-click="queryPrev()">&larr;上一页</li>
+				<li class="next" ng-click="queryNext()">下一页&rarr;</li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,123 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>新增用户</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">登录名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="loginId" ng-model="loginId" ng-chk="checkLoginId" formname="form" placeholder="登录名">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">姓名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" formname="form" placeholder="姓名">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">密码</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="password" class="input-text" name="password" ng-model="password" ng-chk="checkPassword" formname="form" placeholder="密码">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">重复密码</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="password" class="input-text" name="passwordAgain" ng-model="passwordAgain" ng-chk="checkPasswordAgain" formname="form" placeholder="重复密码">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">用户状态</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="status" ng-model="status" ng-chk="checkStatus" formname="form">
+									<option ng-repeat="statusInfo in userStatusInfoList" value="{{statusInfo.id}}">{{statusInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">电子邮件</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="email" ng-model="email" ng-chk="checkEmail" formname="form" placeholder="电子邮件">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">所属项目组</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="group" ng-model="group" ng-chk="checkGroup" formname="form">
+									<option ng-repeat="groupInfo in groupInfoList" value="{{groupInfo.id}}">{{groupInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">角色</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="role" ng-model="role" ng-chk="checkRole" formname="form">
+									<option ng-repeat="roleInfo in userRoleInfoList" value="{{roleInfo.id}}">{{roleInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">岗位</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="position" ng-model="position" ng-chk="checkPosition" formname="form">
+									<option ng-repeat="positionInfo in userPositionInfoList" value="{{positionInfo.id}}">{{positionInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submit()" formname="form">提  交</div>
+						<div class="button" ng-click="back()" formname="form">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+<div class="bodyer odd">
+	<div class="container">
+		<h1>项目组信息修改</h1>
+		<form name="form" novalidate>
+			<div class="wrapper">
+				<div class="pagination">&rarr;</div>
+				<div class="trans-table">
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">编号</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<div class="trans-text">{{id}}</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">组名</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" ng-returndown="submit()" formname="form" placeholder="组名">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submit()" formname="form">提  交</div>
+						<div class="button" ng-click="back()" formname="form">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
