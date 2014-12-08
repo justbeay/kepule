@@ -1,8 +1,8 @@
 define(["cryptojs-sha256"], function(crypto) {
 	return ["addUserCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
 		$scope.groupInfoList = [];
-		// $http.get("/api/group").success(
-		$http.post("/test/todo/groupList.php").success(
+		$http.get("/api/group").success(
+		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -161,8 +161,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				role: $scope.role,
 				position: $scope.position
 			};
-			// $http.post("/api/user", $scope.UserInfo).
-			$http.post("/test/todo/addUser.php", $scope.UserInfo).
+			$http.post("/api/user", $scope.UserInfo).
+			// $http.post("/test/todo/addUser.php", $scope.UserInfo).
 				success(function(data){
 					if(data.addStatus == '0'){
 						alert('用户添加成功');

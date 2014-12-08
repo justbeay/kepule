@@ -24,8 +24,8 @@ define(function() {
 			$scope.GroupInfo = {
 				type: $scope.name,
 			};
-			// $http.post("/api/group", $scope.GroupInfo).
-			$http.post("/test/todo/addGroup.php", $scope.GroupInfo).
+			$http.post("/api/group", $scope.GroupInfo).
+			// $http.post("/test/todo/addGroup.php", $scope.GroupInfo).
 				success(function(data){
 					if(data.addStatus == '0'){
 						alert('项目组添加成功');

@@ -3,8 +3,8 @@ define(["cryptojs-sha256"], function(crypto) {
 		var loginId = $scopeData.get("loginId");
 
 		$scope.groupInfoList = [];
-		// $http.get("/api/group").success(
-		$http.post("/test/todo/groupList.php").success(
+		$http.get("/api/group").success(
+		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -12,8 +12,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				}
 			});
 
-		// $http.get("/api/user/"+loginId).success(
-		$http.get("/test/todo/viewUser.php?id="+loginId).success(
+		$http.get("/api/user/"+loginId).success(
+		// $http.get("/test/todo/viewUser.php?id="+loginId).success(
 			function(data){
 				if(Object.keys(data).length > 0){
 					$scope.loginId = data.loginId;
@@ -179,8 +179,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				role: $scope.role,
 				position: $scope.position
 			};
-			// $http.put("/api/user/"+$scope.loginId, $scope.UserInfo).
-			$http.post("/test/todo/editUser.php", $scope.UserInfo).
+			$http.put("/api/user/"+$scope.loginId, $scope.UserInfo).
+			// $http.post("/test/todo/editUser.php", $scope.UserInfo).
 				success(function(data){
 					if(data.editStatus == '0'){
 						alert('用户添加成功');

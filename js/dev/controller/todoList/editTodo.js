@@ -9,8 +9,8 @@
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		// $http.get("/api/group").success(
-		$http.post("/test/todo/groupList.php").success(
+		$http.get("/api/group").success(
+		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -66,8 +66,8 @@
 				description: $scope.description,
 				done: $scope.done
 			};
-			// $http.put("/api/todo/"+$scope.id, $scope.TodoInfo)
-			$http.post("editTodoInfo.php?id="+$scope.id, $scope.TodoInfo)
+			$http.put("/api/todo/"+$scope.id, $scope.TodoInfo)
+			// $http.post("editTodoInfo.php?id="+$scope.id, $scope.TodoInfo)
 				.success(function(data) {
 					if(data.addStatus == '0'){
 						alert('任务更新成功');

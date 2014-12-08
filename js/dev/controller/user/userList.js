@@ -5,8 +5,8 @@ define(function() {
 		$scope.pageTotal = 1;
 
 		$scope.groupInfoList = [];
-		// $http.get("/api/group").success(
-		$http.post("/test/todo/groupList.php").success(
+		$http.get("/api/group").success(
+		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -30,8 +30,8 @@ define(function() {
 				alert('Permission denied');
 				return;
 			}
-			// $http.delete("/api/user/"+$scope.id).
-			$http.get("/test/todo/deleleUser.php?id="+$scope.id).
+			$http.delete("/api/user/"+$scope.id).
+			// $http.get("/test/todo/deleleUser.php?id="+$scope.id).
 				success(function($data){
 					alert('删除成功');
 					$route.reload();
@@ -42,8 +42,8 @@ define(function() {
 		};
 		$scope.getUserList = function(pageno){
 			$scope.pageCur = pageno;
-			// $http.get("/api/user").success(
-			$http.post("/test/todo/userList.php").success(
+			$http.get("/api/user").success(
+			// $http.post("/test/todo/userList.php").success(
 				function(data) {
 					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 					$scope.userList = [];

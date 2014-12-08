@@ -4,8 +4,8 @@ define(function() {
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		// $http.get("/api/group").success(
-		$http.post("/test/todo/groupList.php").success(
+		$http.get("/api/group").success(
+		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -76,8 +76,8 @@ define(function() {
 				executor: $scope.executor,
 				group: $scope.group
 			};
-			// $http.post("/api/todo", $scope.TodoInfo).
-			$http.post("/test/todo/addTodo.php", $scope.TodoInfo).
+			$http.post("/api/todo", $scope.TodoInfo).
+			// $http.post("/test/todo/addTodo.php", $scope.TodoInfo).
 				success(function(data){
 					if(data.addStatus == '0'){
 						alert('任务添加成功');

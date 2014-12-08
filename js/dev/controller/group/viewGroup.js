@@ -9,8 +9,8 @@ define(function() {
 			$scopeData.set("id", id);
 			$location.path("editGroup");
 		};
-		// $http.get("/api/group/"+id).success(
-		$http.get("/test/todo/viewGroup.php?id="+id).success(
+		$http.get("/api/group/"+id).success(
+		// $http.get("/test/todo/viewGroup.php?id="+id).success(
 			function(data){
 				if(Object.keys(data).length > 0){
 					data.name = data.type;
