@@ -32,7 +32,7 @@ define(function() {
 				return;
 			}
 			$http.delete("/api/user/"+$scope.id).
-			// $http.get("/test/todo/deleleUser.php?id="+$scope.id).
+			// $http.get("/test/todo/deleleUser.php?id="+id).
 				success(function($data){
 					alert('删除成功');
 					$route.reload();

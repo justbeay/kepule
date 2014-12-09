@@ -9,13 +9,11 @@
 		<table>
 			<thead>
 			<tr>
-				<th>编号</th>
 				<th>组名</th>
 				<th>操作</th>
 			</tr>
 			</thead>
 			<tr ng-repeat="group in groupList">
-				<td>{{group.id}}</td>
 				<td><a ng-click="view(group.id)">{{group.name}}</a></td>
 				<td><a ng-click="edit(group.id)">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(group.id)">删除</a></td>
 			</tr>

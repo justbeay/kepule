@@ -18,8 +18,8 @@
 					$scope.groupInfoList.push(data[i]);
 				}
 			});
-		// $http.get("/api/todo/"+$scope.id).
-		$http.get("/test/todo/viewTodo.php?id="+$scope.id).
+		$http.get("/api/todo/"+$scope.id).
+		// $http.get("/test/todo/viewTodo.php?id="+$scope.id).
 			success(function($data){
 				if(Object.keys($data).length > 0){
 					$scope.id = $data.id;

@@ -21,6 +21,7 @@ define(function() {
 		// $http.get("/test/todo/viewGroup.php?id="+$scope.id).success(
 			function(data){
 				if(Object.keys(data).length > 0){
+					$scope.id = data._id;
 					$scope.name = data.type;
 				}else{
 					alert("信息获取失败");

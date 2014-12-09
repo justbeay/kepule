@@ -1,4 +1,4 @@
-﻿define(["cryptojs-sha256"], function(crypto) {
+define(["cryptojs-sha256"], function(crypto) {
 	return ["loginCtrl", ["$scope", "$location", "$http", "$cookies", "$window", function($scope, $location, $http, $cookies, $window) {
 		if($scope.isLogin){
 			$location.path("todoList");
@@ -46,14 +46,14 @@
 			$http.post("/userBiz/login", $scope.UserInfo).
 			// $http.post("/test/todo/login.php", $scope.UserInfo).
 				success(function(data){
-					if(data == 'success'){
+					if(data == '"success"'){
 						$cookies.isLogin = true;
-						$cookies.role = data.role;
+						$cookies.loginId = $scope.name;
 						alert('用户登录成功');
 						$location.path('todoList');
 						$window.location.reload();
 					}else{
-						alert('用户登录失败');
+						alert(data.error && data.error.msg ? data.error.msg : '用户登录失败');
 					}
 				}
 			);

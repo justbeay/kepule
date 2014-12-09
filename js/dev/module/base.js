@@ -228,7 +228,8 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 				success(function(data){
 					alert("您已安全退出");
 					$cookies.isLogin = '';
-					$cookies.role = '';
+					$cookies.loginId = '';
+					$cookies.loginRole = '';
 					$location.path('todoList');
 					$window.location.reload();
 				}).
@@ -237,24 +238,21 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 				});
 		}
 		$scope.getLoginRole = function(){
-			if(!$cookies.isLogin || !$cookies.role) return -1;
-			else return $cookies.role;
+			if(!$cookies.isLogin || !$cookies.loginId) return -1;
+			if($cookies.loginRole) return $cookies.loginRole;
+			var loginId = $cookies.loginId;
+			$http.get("/api/user/"+loginId).success(
+			// $http.get("/test/todo/viewUser.php?id="+loginId).
+				success(function(data){
+					$cookies.loginRole = data.role;
+					return data.role;
+				}).
+				error(function(){
+					alert("用户信息获取失败");
+					return -1;
+				});
 		}
 		$scope.isLogin = $cookies.isLogin ? 1 : 0;
-		$scope.scrollTop = function(){
-			scrollTo(0, 0);
-			$('.navUp').hide();
-		}
-		var navUp = $('.navUp');
-		navUp.hide();
-		$(document).scroll(function(){
-			var scrTop = (document.body.scrollTop || document.documentElement.scrollTop);
-			if(scrTop > 10) {
-				navUp.show();
-			} else {
-				navUp.hide();
-			}
-        });
 	}])
 	;
 	

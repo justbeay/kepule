@@ -13,6 +13,7 @@ define(function() {
 		// $http.get("/test/todo/viewGroup.php?id="+id).success(
 			function(data){
 				if(Object.keys(data).length > 0){
+					data.id = data._id;
 					data.name = data.type;
 					$scope.group = data;
 				}else{

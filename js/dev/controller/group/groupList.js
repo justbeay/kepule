@@ -21,7 +21,7 @@ define(function() {
 				return;
 			}
 			$http.delete("/api/group/"+$scope.id).
-			// $http.get("/test/todo/deleleGroup.php?id="+$scope.id).
+			// $http.get("/test/todo/deleleGroup.php?id="+id).
 				success(function($data){
 					alert('删除成功');
 					$route.reload();
