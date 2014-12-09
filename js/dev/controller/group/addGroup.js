@@ -17,7 +17,7 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.getLoginRole() != '9'){
+			if($scope.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}

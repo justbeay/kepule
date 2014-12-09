@@ -3,10 +3,11 @@ define(function() {
 		var loginId = $scopeData.get("loginId");
 
 		$scope.groupInfoList = [];
-		// $http.get("/test/group").success(
-		// $http.post("/test/todo/groupList.php").success(
-			function(data) {
+		// $http.get("/test/group").
+		// $http.post("/test/todo/groupList.php").
+			success(function(data) {
 				for(var i=0; i<data.length; i++) {
+					data[i].id = data[i]._id;
 					data[i].name = data[i].type;
 					$scope.groupInfoList.push(data[i]);
 				}
@@ -19,9 +20,9 @@ define(function() {
 			$scopeData.set("loginId", loginId);
 			$location.path("editUser");
 		};
-		$http.get("/api/user/"+loginId).success(
-		// $http.get("/test/todo/viewUser.php?id="+loginId).success(
-			function(data){
+		$http.get("/api/user/"+loginId).
+		// $http.get("/test/todo/viewUser.php?id="+loginId).
+			success(function(data){
 				if(Object.keys(data).length > 0){
 					data.group = $scope.getNameFromList($scope.groupInfoList, data.group);
 					data.position = $scope.getNameFromList($scope.userPositionInfoList, data.position);

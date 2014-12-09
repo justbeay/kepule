@@ -237,22 +237,9 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 					alert("注销失败");
 				});
 		}
-		$scope.getLoginRole = function(){
-			if(!$cookies.isLogin || !$cookies.loginId) return -1;
-			if($cookies.loginRole) return $cookies.loginRole;
-			var loginId = $cookies.loginId;
-			$http.get("/api/user/"+loginId).success(
-			// $http.get("/test/todo/viewUser.php?id="+loginId).
-				success(function(data){
-					$cookies.loginRole = data.role;
-					return data.role;
-				}).
-				error(function(){
-					alert("用户信息获取失败");
-					return -1;
-				});
-		}
 		$scope.isLogin = $cookies.isLogin ? 1 : 0;
+		$scope.loginRole = !!$cookies.isLogin && !!$cookies.loginId && !!$cookies.loginRole 
+							? parseInt($cookies.loginRole) : -1;
 	}])
 	;
 	

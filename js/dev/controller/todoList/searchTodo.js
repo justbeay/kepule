@@ -5,9 +5,9 @@
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		$http.get("/api/group").success(
-		// $http.post("/test/todo/groupList.php").success(
-			function(data) {
+		$http.get("/api/group").
+		// $http.post("/test/todo/groupList.php").
+			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
 					data[i].name = data[i].type;

@@ -17,9 +17,9 @@ define(function() {
 				}
 			}
 		};
-		$http.get("/api/group/"+$scope.id).success(
-		// $http.get("/test/todo/viewGroup.php?id="+$scope.id).success(
-			function(data){
+		$http.get("/api/group/"+$scope.id).
+		// $http.get("/test/todo/viewGroup.php?id="+$scope.id).
+			success(function(data){
 				if(Object.keys(data).length > 0){
 					$scope.id = data._id;
 					$scope.name = data.type;
@@ -33,7 +33,7 @@ define(function() {
 				$location.path("groupList");
 			});
 		$scope.submit = function() {
-			if($scope.getLoginRole() != '9'){
+			if($scope.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}

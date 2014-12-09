@@ -5,9 +5,9 @@ define(function() {
 		$scope.pageTotal = 1;
 
 		$scope.groupInfoList = [];
-		$http.get("/api/group").success(
-		// $http.post("/test/todo/groupList.php").success(
-			function(data) {
+		$http.get("/api/group").
+		// $http.post("/test/todo/groupList.php").
+			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
 					data[i].name = data[i].type;
@@ -27,7 +27,7 @@ define(function() {
 			$location.path("viewUser");
 		};
 		$scope.delete = function(id) {
-			if($scope.getLoginRole() != '9'){
+			if($scope.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}
@@ -43,9 +43,9 @@ define(function() {
 		};
 		$scope.getUserList = function(pageno){
 			$scope.pageCur = pageno;
-			$http.get("/api/user").success(
-			// $http.post("/test/todo/userList.php").success(
-				function(data) {
+			$http.get("/api/user").
+			// $http.post("/test/todo/userList.php").
+				success(function(data) {
 					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 					$scope.userList = [];
 					var rowStart =$scope.pageSize*($scope.pageCur-1);

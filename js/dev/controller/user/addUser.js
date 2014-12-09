@@ -1,9 +1,9 @@
 define(["cryptojs-sha256"], function(crypto) {
 	return ["addUserCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
 		$scope.groupInfoList = [];
-		$http.get("/api/group").success(
-		// $http.post("/test/todo/groupList.php").success(
-			function(data) {
+		$http.get("/api/group").
+		// $http.post("/test/todo/groupList.php").
+			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
 					data[i].name = data[i].type;
@@ -145,7 +145,7 @@ define(["cryptojs-sha256"], function(crypto) {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.getLoginRole() != '9'){
+			if($scope.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}

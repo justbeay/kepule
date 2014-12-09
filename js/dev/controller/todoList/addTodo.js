@@ -4,9 +4,9 @@ define(function() {
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		$http.get("/api/group").success(
-		// $http.post("/test/todo/groupList.php").success(
-			function(data) {
+		$http.get("/api/group").
+		// $http.post("/test/todo/groupList.php").
+			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
 					data[i].name = data[i].type;
@@ -66,7 +66,7 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if(parseInt($scope.getLoginRole()) <= 0){
+			if($scope.loginRole <= 0){
 				alert('Permission denied');
 				return;
 			}

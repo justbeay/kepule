@@ -18,7 +18,7 @@ define(function() {
 			$location.path("searchTodo");
 		};
 		$scope.delete = function(id) {
-			if(parseInt($scope.getLoginRole()) <= 0){
+			if($scope.loginRole <= 0){
 				alert('Permission denied');
 				return;
 			}
@@ -41,9 +41,9 @@ define(function() {
 				done: $scopeData.get('done'),
 				group: $scopeData.get('group')
 			};
-			$http.get("/api/todo", $scope.SearchInfo).success(
-			// $http.post("/test/todo/todoList.php", $scope.SearchInfo).success(
-				function(data) {
+			$http.get("/api/todo", $scope.SearchInfo).
+			// $http.post("/test/todo/todoList.php", $scope.SearchInfo).
+				success(function(data) {
 					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 					$scope.todoList = [];
 					var rowStart =$scope.pageSize*($scope.pageCur-1);
