@@ -37,7 +37,7 @@ define(["cryptojs-sha256"], function(crypto) {
 			var loginTime = new Date().getTime();
 			var password = crypto.SHA256($scope.password).toString();
 			password = crypto.HmacSHA256(password, $scope.encrySeed).toString();
-			password = crypto.HmacSHA256(password, $scope.loginId+":"+loginTime).toString();
+			password = crypto.HmacSHA256(password, $scope.name+":"+loginTime).toString();
 			$scope.UserInfo = {
 				loginId: $scope.name,
 				password: password,
