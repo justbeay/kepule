@@ -223,8 +223,8 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 			return id;
 		}
 		$scope.logout = function(){
-			// $http.post("/userBiz/logout").
-			$http.post("/test/todo/logout.php").
+			$http.post("/userBiz/logout").
+			// $http.post("/test/todo/logout.php").
 				success(function(data){
 					alert("您已安全退出");
 					$cookies.isLogin = '';

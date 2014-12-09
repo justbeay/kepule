@@ -7,6 +7,7 @@ define(["cryptojs-sha256"], function(crypto) {
 		// $http.post("/test/todo/groupList.php").success(
 			function(data) {
 				for(var i=0; i<data.length; i++) {
+					data[i].id = data[i]._id;
 					data[i].name = data[i].type;
 					$scope.groupInfoList.push(data[i]);
 				}

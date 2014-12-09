@@ -40,6 +40,7 @@ define(function() {
 					var rowStart =$scope.pageSize*($scope.pageCur-1);
 					var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
 					for(var i=rowStart; i<rowEnd; i++) {
+						data[i].id = data[i]._id;
 						data[i].name = data[i].type;
 						$scope.groupList.push(data[i]);
 					}
