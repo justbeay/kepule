@@ -3,7 +3,7 @@ define(function() {
 		var loginId = $scopeData.get("loginId");
 
 		$scope.groupInfoList = [];
-		// $http.get("/test/group").
+		$http.get("/api/group").
 		// $http.post("/test/todo/groupList.php").
 			success(function(data) {
 				for(var i=0; i<data.length; i++) {
