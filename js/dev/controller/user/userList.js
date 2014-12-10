@@ -19,11 +19,11 @@ define(function() {
 			$location.path("addUser");
 		};
 		$scope.edit = function(id) {
-			$scopeData.set("loginId", id);
+			$scopeData.set("id", id);
 			$location.path("editUser");
 		};
 		$scope.view = function(id) {
-			$scopeData.set("loginId", id);
+			$scopeData.set("id", id);
 			$location.path("viewUser");
 		};
 		$scope.delete = function(id) {
@@ -51,6 +51,7 @@ define(function() {
 					var rowStart =$scope.pageSize*($scope.pageCur-1);
 					var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
 					for(var i=rowStart; i<rowEnd; i++) {
+						data[i].id = data[i]._id;
 						data[i].group = $scope.getNameFromList($scope.groupInfoList, data[i].group);
 						data[i].position = $scope.getNameFromList($scope.userPositionInfoList, data[i].position);
 						data[i].status = $scope.getNameFromList($scope.userStatusInfoList, data[i].status);

@@ -18,12 +18,12 @@
 			</tr>
 			</thead>
 			<tr ng-repeat="user in userList">
-				<td><a ng-click="view(user.loginId)">{{user.name}}</a></td>
+				<td><a ng-click="view(user.id)">{{user.name}}</a></td>
 				<td>{{user.group}}</td>
 				<td>{{user.position}}</td>
 				<td>{{user.status}}</td>
 				<td>{{user.role}}</td>
-				<td><a ng-click="edit(user.loginId)">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(user.loginId)">删除</a></td>
+				<td><a ng-click="edit(user.id)">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(user.id)">删除</a></td>
 			</tr>
 		</table>
 		

@@ -1,6 +1,6 @@
 define(["cryptojs-sha256"], function(crypto) {
 	return ["editUserCtrl", ["$scope", "$scopeData", "$location", "$http", function($scope, $scopeData, $location, $http) {
-		var loginId = $scopeData.get("loginId");
+		var id = $scopeData.get("id");
 
 		$scope.groupInfoList = [];
 		$http.get("/api/group").
@@ -13,10 +13,11 @@ define(["cryptojs-sha256"], function(crypto) {
 				}
 			});
 
-		$http.get("/api/user/"+loginId).
-		// $http.get("/test/todo/viewUser.php?id="+loginId).
+		$http.get("/api/user/"+id).
+		// $http.get("/test/todo/viewUser.php?id="+id).
 			success(function(data){
 				if(Object.keys(data).length > 0){
+					$scope.id = data._id;
 					$scope.loginId = data.loginId;
 					$scope.name = data.name;
 					$scope.email = data.email;
@@ -180,7 +181,7 @@ define(["cryptojs-sha256"], function(crypto) {
 				role: $scope.role,
 				position: $scope.position
 			};
-			$http.put("/api/user/"+$scope.loginId, $scope.UserInfo).
+			$http.put("/api/user/"+id, $scope.UserInfo).
 			// $http.post("/test/todo/editUser.php", $scope.UserInfo).
 				success(function(data){
 					if(data.editStatus == '0'){

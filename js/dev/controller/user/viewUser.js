@@ -1,6 +1,6 @@
 define(function() {
 	return ["viewUserCtrl", ["$scope", "$scopeData", "$location", "$http", function($scope, $scopeData, $location, $http) {
-		var loginId = $scopeData.get("loginId");
+		var id = $scopeData.get("id");
 
 		$scope.groupInfoList = [];
 		$http.get("/api/group").
@@ -17,13 +17,14 @@ define(function() {
 			$location.path("userList");
 		};
 		$scope.edit = function() {
-			$scopeData.set("loginId", loginId);
+			$scopeData.set("id", id);
 			$location.path("editUser");
 		};
-		$http.get("/api/user/"+loginId).
-		// $http.get("/test/todo/viewUser.php?id="+loginId).
+		$http.get("/api/user/"+id).
+		// $http.get("/test/todo/viewUser.php?id="+id).
 			success(function(data){
 				if(Object.keys(data).length > 0){
+					data.id = data._id;
 					data.group = $scope.getNameFromList($scope.groupInfoList, data.group);
 					data.position = $scope.getNameFromList($scope.userPositionInfoList, data.position);
 					data.status = $scope.getNameFromList($scope.userStatusInfoList, data.status);

@@ -49,6 +49,7 @@ define(function() {
 					var rowStart =$scope.pageSize*($scope.pageCur-1);
 					var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
 					for(var i=rowStart; i<rowEnd; i++) {
+						data[i].id = data[i]._id;
 						data[i].done = data[i].done ? "已完成" : "未完成";
 						$scope.todoList.push(data[i]);
 					}
