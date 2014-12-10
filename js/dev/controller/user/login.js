@@ -46,22 +46,15 @@ define(["cryptojs-sha256"], function(crypto) {
 			$http.post("/userBiz/login", $scope.UserInfo).
 			// $http.post("/test/todo/login.php", $scope.UserInfo).
 				success(function(data){
-					if(data == 'success'){
-						$http.get("/api/user/"+$scope.name).
-						// $http.get("/test/todo/viewUser.php?id="+$scope.name).
-							success(function(data){
-								$cookies.isLogin = true;
-								$cookies.loginId = $scope.name;
-								$cookies.loginRole = data.role;
-								alert('用户登录成功');
-								$location.path('todoList');
-								$window.location.reload();
-							}).
-							error(function(){
-								alert("用户信息获取失败");
-							});
+					if(!data.error){
+						$cookies.isLogin = true;
+						$cookies._loginId = $scope._id;
+						$cookies.loginRole = data.role;
+						alert('用户登录成功');
+						$location.path('todoList');
+						$window.location.reload();
 					}else{
-						alert(data.error && data.error.msg ? data.error.msg : '用户登录失败');
+						alert(data.error.msg ? data.error.msg : '用户登录失败');
 					}
 				}).
 				error(function(){

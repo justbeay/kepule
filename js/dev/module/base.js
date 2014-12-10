@@ -228,7 +228,7 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 				success(function(data){
 					alert("您已安全退出");
 					$cookies.isLogin = '';
-					$cookies.loginId = '';
+					$cookies._loginId = '';
 					$cookies.loginRole = '';
 					$location.path('todoList');
 					$window.location.reload();
@@ -238,7 +238,7 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 				});
 		}
 		$scope.isLogin = $cookies.isLogin ? 1 : 0;
-		$scope.loginRole = !!$cookies.isLogin && !!$cookies.loginId && !!$cookies.loginRole 
+		$scope.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
 							? parseInt($cookies.loginRole) : -1;
 	}])
 	;
