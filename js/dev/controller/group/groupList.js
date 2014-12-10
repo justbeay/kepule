@@ -20,7 +20,7 @@ define(function() {
 				alert('Permission denied');
 				return;
 			}
-			$http.delete("/api/group/"+$scope.id).
+			$http.delete("/api/group/"+id).
 			// $http.get("/test/todo/deleleGroup.php?id="+id).
 				success(function($data){
 					alert('删除成功');

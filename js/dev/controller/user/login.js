@@ -1,4 +1,4 @@
-﻿define(["cryptojs-sha256"], function(crypto) {
+define(["cryptojs-sha256"], function(crypto) {
 	return ["loginCtrl", ["$scope", "$location", "$http", "$cookies", "$window", function($scope, $location, $http, $cookies, $window) {
 		if($scope.isLogin){
 			$location.path("todoList");
@@ -47,7 +47,7 @@
 			// $http.post("/test/todo/login.php", $scope.UserInfo).
 				success(function(data){
 					if(data == 'success'){
-						$http.get("/api/user/"+loginId).
+						$http.get("/api/user/"+$scope.name).
 						// $http.get("/test/todo/viewUser.php?id="+$scope.name).
 							success(function(data){
 								$cookies.isLogin = true;
