@@ -44,11 +44,11 @@ define(["cryptojs-sha256"], function(crypto) {
 				loginTime: loginTime
 			};
 			$http.post("/userBiz/login", $scope.UserInfo).  //url request for production
-			// $http.post("/test/todo/login.php", $scope.UserInfo).  //url request for testing
+//			$http.post("/test/todo/login.php", $scope.UserInfo).  //url request for testing
 				success(function(data){
 					if(!data.error){
 						$cookies.isLogin = true;
-						$cookies._loginId = $scope._id;
+						$cookies._loginId = data._id;
 						$cookies.loginRole = data.role;
 						alert('用户登录成功');
 						$location.path('todoList');
