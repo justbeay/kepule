@@ -43,8 +43,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				password: password,
 				loginTime: loginTime
 			};
-			$http.post("/userBiz/login", $scope.UserInfo).
-			// $http.post("/test/todo/login.php", $scope.UserInfo).
+			$http.post("/userBiz/login", $scope.UserInfo).  //url request for production
+			// $http.post("/test/todo/login.php", $scope.UserInfo).  //url request for testing
 				success(function(data){
 					if(!data.error){
 						$cookies.isLogin = true;

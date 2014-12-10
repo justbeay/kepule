@@ -3,8 +3,8 @@ define(function() {
 		var id = $scopeData.get("id");
 
 		$scope.groupInfoList = [];
-		$http.get("/api/group").
-		// $http.post("/test/todo/groupList.php").
+		$http.get("/api/group").  //url request for production
+		// $http.post("/test/todo/groupList.php").  //url request for testing
 			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
@@ -20,8 +20,8 @@ define(function() {
 			$scopeData.set("id", id);
 			$location.path("editUser");
 		};
-		$http.get("/api/user/"+id).
-		// $http.get("/test/todo/viewUser.php?id="+id).
+		$http.get("/api/user/"+id).  //url request for production
+		// $http.get("/test/todo/viewUser.php?id="+id).  //url request for testing
 			success(function(data){
 				if(Object.keys(data).length > 0){
 					data.id = data._id;

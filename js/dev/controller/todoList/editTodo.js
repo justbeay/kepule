@@ -9,8 +9,8 @@
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		$http.get("/api/group").
-		// $http.post("/test/todo/groupList.php").
+		$http.get("/api/group").  //url request for production
+		// $http.post("/test/todo/groupList.php").  //url request for testing
 			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
@@ -18,8 +18,8 @@
 					$scope.groupInfoList.push(data[i]);
 				}
 			});
-		$http.get("/api/todo/"+$scope.id).
-		// $http.get("/test/todo/viewTodo.php?id="+$scope.id).
+		$http.get("/api/todo/"+$scope.id).  //url request for production
+		// $http.get("/test/todo/viewTodo.php?id="+$scope.id).  //url request for testing
 			success(function($data){
 				if(Object.keys($data).length > 0){
 					$scope.id = $data.id;
@@ -67,8 +67,8 @@
 				description: $scope.description,
 				done: $scope.done
 			};
-			$http.put("/api/todo/"+$scope.id, $scope.TodoInfo).
-			// $http.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo).
+			$http.put("/api/todo/"+$scope.id, $scope.TodoInfo).  //url request for production
+			// $http.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo).  //url request for testing
 				success(function(data) {
 					if(data.addStatus == '0'){
 						alert('任务更新成功');

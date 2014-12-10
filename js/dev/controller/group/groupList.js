@@ -20,8 +20,8 @@ define(function() {
 				alert('Permission denied');
 				return;
 			}
-			$http.delete("/api/group/"+id).
-			// $http.get("/test/todo/deleleGroup.php?id="+id).
+			$http.delete("/api/group/"+id).  //url request for production
+			// $http.get("/test/todo/deleleGroup.php?id="+id).  //url request for testing
 				success(function($data){
 					alert('删除成功');
 					$route.reload();
@@ -32,8 +32,8 @@ define(function() {
 		};
 		$scope.getGroupList = function(pageno){
 			$scope.pageCur = pageno;
-			$http.get("/api/group").
-			// $http.get("/test/todo/groupList.php").
+			$http.get("/api/group").  //url request for production
+			// $http.get("/test/todo/groupList.php").  //url request for testing
 				success(function(data) {
 					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 					$scope.groupList = [];

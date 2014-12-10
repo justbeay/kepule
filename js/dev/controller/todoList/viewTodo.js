@@ -7,8 +7,8 @@ define(function() {
 		}
 		var todoId = $scopeData.get("id");
 		$scope.groupInfoList = [];
-		$http.get("/api/group/").
-		// $http.post("/test/todo/groupList.php").
+		$http.get("/api/group/").  //url request for production
+		// $http.post("/test/todo/groupList.php").  //url request for testing
 			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].name = data[i].type;
@@ -22,8 +22,8 @@ define(function() {
 		$scope.edit = function() {
 			$location.path("editTodo");
 		};
-		$http.get("/api/todo/"+todoId).
-		// $http.get("/test/todo/viewTodo.php?id="+todoId).
+		$http.get("/api/todo/"+todoId).  //url request for production
+		// $http.get("/test/todo/viewTodo.php?id="+todoId).  //url request for testing
 			success(function($data){
 				if(Object.keys($data).length > 0){
 					$scope.todo = $data;

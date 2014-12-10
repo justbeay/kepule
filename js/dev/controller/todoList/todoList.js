@@ -22,8 +22,8 @@ define(function() {
 				alert('Permission denied');
 				return;
 			}
-			$http.delete("/api/todo/"+$scope.id).
-			// $http.get("/test/todo/viewTodo.php?id="+$scope.id).
+			$http.delete("/api/todo/"+$scope.id).  //url request for production
+			// $http.get("/test/todo/viewTodo.php?id="+$scope.id).  //url request for testing
 				success(function($data){
 					alert('删除成功');
 					$route.reload();
@@ -41,8 +41,8 @@ define(function() {
 				done: $scopeData.get('done'),
 				group: $scopeData.get('group')
 			};
-			$http.get("/api/todo", $scope.SearchInfo).
-			// $http.post("/test/todo/todoList.php", $scope.SearchInfo).
+			$http.get("/api/todo", $scope.SearchInfo).  //url request for production
+			// $http.post("/test/todo/todoList.php", $scope.SearchInfo).  //url request for testing
 				success(function(data) {
 					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 					$scope.todoList = [];

@@ -9,8 +9,8 @@ define(function() {
 			$scopeData.set("id", id);
 			$location.path("editGroup");
 		};
-		$http.get("/api/group/"+id).
-		// $http.get("/test/todo/viewGroup.php?id="+id).
+		$http.get("/api/group/"+id).  //url request for production
+		// $http.get("/test/todo/viewGroup.php?id="+id).  //url request for testing
 			success(function(data){
 				if(Object.keys(data).length > 0){
 					data.id = data._id;

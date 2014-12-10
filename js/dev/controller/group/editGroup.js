@@ -17,8 +17,8 @@ define(function() {
 				}
 			}
 		};
-		$http.get("/api/group/"+$scope.id).
-		// $http.get("/test/todo/viewGroup.php?id="+$scope.id).
+		$http.get("/api/group/"+$scope.id).  //url request for production
+		// $http.get("/test/todo/viewGroup.php?id="+$scope.id).  //url request for testing
 			success(function(data){
 				if(Object.keys(data).length > 0){
 					$scope.id = data._id;
@@ -40,8 +40,8 @@ define(function() {
 			$scope.GroupInfo = {
 				type: $scope.name,
 			};
-			$http.put("/api/group/"+$scope.id, $scope.GroupInfo).
-			// $http.post("/test/todo/editGroup.php?id="+$scope.id, $scope.GroupInfo).
+			$http.put("/api/group/"+$scope.id, $scope.GroupInfo).  //url request for production
+			// $http.post("/test/todo/editGroup.php?id="+$scope.id, $scope.GroupInfo).  //url request for testing
 				success(function(data){
 					if(data.addStatus == '0'){
 						alert('项目组添加成功');

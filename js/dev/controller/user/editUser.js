@@ -3,8 +3,8 @@ define(["cryptojs-sha256"], function(crypto) {
 		var id = $scopeData.get("id");
 
 		$scope.groupInfoList = [];
-		$http.get("/api/group").
-		// $http.post("/test/todo/groupList.php").
+		$http.get("/api/group").  //url request for production
+		// $http.post("/test/todo/groupList.php").  //url request for testing
 			success(function(data) {
 				for(var i=0; i<data.length; i++) {
 					data[i].id = data[i]._id;
@@ -13,8 +13,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				}
 			});
 
-		$http.get("/api/user/"+id).
-		// $http.get("/test/todo/viewUser.php?id="+id).
+		$http.get("/api/user/"+id).  //url request for production
+		// $http.get("/test/todo/viewUser.php?id="+id).  //url request for testing
 			success(function(data){
 				if(Object.keys(data).length > 0){
 					$scope.id = data._id;
@@ -181,8 +181,8 @@ define(["cryptojs-sha256"], function(crypto) {
 				role: $scope.role,
 				position: $scope.position
 			};
-			$http.put("/api/user/"+id, $scope.UserInfo).
-			// $http.post("/test/todo/editUser.php", $scope.UserInfo).
+			$http.put("/api/user/"+id, $scope.UserInfo).  //url request for production
+			// $http.post("/test/todo/editUser.php", $scope.UserInfo).  //url request for testing
 				success(function(data){
 					if(data.editStatus == '0'){
 						alert('用户添加成功');
