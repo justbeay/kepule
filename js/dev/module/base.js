@@ -1,4 +1,4 @@
-define(["angular", "angular-route", "config", "angular-cookies", "service", "component"], function(angular) {
+﻿define(["angular", "angular-route", "config", "angular-cookies", "service", "component"], function(angular) {
 	return angular.module('ngView', ["ngRoute", "ngConfig", "ngCookies", "ngService", "ngComponent"])
 
 	.config(
@@ -149,7 +149,7 @@ define(["angular", "angular-route", "config", "angular-cookies", "service", "com
 				}
 			});
 
-	        $routeProvider.otherwise({redirectTo: '/welcome'});
+	        $routeProvider.otherwise({redirectTo: '/todoList'});
 	    }]
 	)
 
