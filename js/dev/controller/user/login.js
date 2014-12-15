@@ -1,6 +1,6 @@
 define(["cryptojs-sha256"], function(crypto) {
-	return ["loginCtrl", ["$scope", "$location", "$config", "$http", "$cookies", "$remote", 
-	function($scope, $location, $config, $http, $cookies, $remote) {
+	return ["loginCtrl", ["$scope", "$location", "$config", "$http", "$cookies", "$restful", 
+	function($scope, $location, $config, $http, $cookies, $restful) {
 		if($scope.loginInfo.isLogin){
 			$location.path("todoList");
 		}
@@ -45,7 +45,7 @@ define(["cryptojs-sha256"], function(crypto) {
 				loginTime: loginTime
 			};
 			$restful.post("/userBiz/login", $scope.UserInfo, function(data){  //url request for production
-//			$remote.post("/test/todo/login.php", $scope.UserInfo, function(data){  //url request for testing
+//			$restful.post("/test/todo/login.php", $scope.UserInfo, function(data){  //url request for testing
 				alert('用户登录成功');
 				$cookies.isLogin = true;
 				$cookies._loginId = data._id;
