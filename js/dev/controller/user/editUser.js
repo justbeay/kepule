@@ -111,7 +111,7 @@ define(["cryptojs-sha256"], function(crypto) {
 
 			$scope.UserInfo = {
 				name: $scope.name,
-				password: $scope.password,
+				password: password,
 				status: $scope.status,
 				email: $scope.email,
 				group: $scope.group,

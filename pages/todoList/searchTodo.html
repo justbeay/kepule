@@ -10,7 +10,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="name" ng-model="name" formname="form" placeholder="任务名称">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-returndown="submit()" formname="form" placeholder="任务名称">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -21,7 +21,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="creater" ng-model="creater" formname="form" placeholder="创建人">
+								<input type="text" class="input-text" name="creater" ng-model="creater" ng-returndown="submit()" formname="form" placeholder="创建人">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -32,7 +32,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="executor" ng-model="executor" formname="form" placeholder="执行人">
+								<input type="text" class="input-text" name="executor" ng-model="executor" ng-returndown="submit()" formname="form" placeholder="执行人">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -43,7 +43,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="done" ng-model="done" ng-chk="checkDone" formname="form">
+								<select class="input-select" name="done" ng-model="done" formname="form">
 									<option value="0">未完成</option>
 									<option value="1">已完成</option>
 								</select>
