@@ -24,7 +24,7 @@ define(function() {
 		$restful.get("/api/user/"+id, function(data){  //url request for production
 //		$restful.get("/test/todo/viewUser.php?id="+id, function(data){  //url request for testing
 			data.id = data._id;
-			data.group = $common.getTranslation($scope.groupInfoList, data.group);
+			data.group = $common.getTranslation($scope.groupInfoList, data.group._id);
 			data.sex = $dict.sex(data.sex);
 			data.residenceType = $dict.residenceType(data.residenceType);
 			data.marital = data.marital ? '已婚' : '未婚';

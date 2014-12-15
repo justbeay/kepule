@@ -46,7 +46,7 @@ define(function() {
 				var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
 				for(var i=rowStart; i<rowEnd; i++) {
 					data[i].id = data[i]._id;
-					data[i].group = $common.getTranslation($scope.groupInfoList, data[i].group);
+					data[i].group = $common.getTranslation($scope.groupInfoList, data[i].group._id);
 					data[i].position = $dict.position(data[i].position);
 					data[i].status = $dict.status(data[i].status);
 					data[i].role = $dict.role(data[i].role);

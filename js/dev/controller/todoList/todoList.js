@@ -37,8 +37,7 @@ define(function() {
 				done: $scopeData.get('done'),
 				group: $scopeData.get('group')
 			};
-			$restful.post("/api/todo", $scope.SearchInfo, function(data) {  //url request for production
-//			$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
+			function dealQueryResult(data){
 				$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
 				$scope.todoList = [];
 				var rowStart =$scope.pageSize*($scope.pageCur-1);
@@ -48,7 +47,18 @@ define(function() {
 					data[i].done = data[i].done ? "已完成" : "未完成";
 					$scope.todoList.push(data[i]);
 				}
-			});
+			}
+			if($scopeData.get('isSearch')){
+				$restful.post("/todoBiz/list", $scope.SearchInfo, function(data) {  //url request for production
+	//			$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
+					dealQueryResult(data);
+				});
+			}else{
+				$restful.get("/api/todo", function(data) {  //url request for production
+	//			$restful.get("/test/todo/todoList.php", function(data) {  //url request for testing
+					dealQueryResult(data);
+				});
+			}
 		};
 		$scope.queryPrev = function() {
 			$scope.query(Math.max($scope.pageCur-1, 1));
