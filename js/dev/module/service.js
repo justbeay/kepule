@@ -49,67 +49,91 @@ define(["angular", "config"], function(angular) {
 	.factory("$remote", ["$config", "$http", function($config, $http) {
 		/** 返回校验 **/
 		function returnCheck(data) {
-			data = data || {};
-			alert(data.returnMsg);
+			if(data.error && data.error.msg){
+				alert(data.error.msg);
+				return false;
+			}
+			return true;
 		};
 		
-		function get(action, callback){
-	    	return $http.get(action).success(function(data ,status, headers, config){
-	    		if(typeof callback == "function"){
-	    			callback(data, status, headers, config);
-	    		}
+		function get(url, callback){
+	    	return $http.get(url).success(function(data ,status, headers, config){
+	    		if(returnCheck(data)){
+		    		if(typeof callback == "function"){
+		    			callback(data, status, headers, config);
+		    		}
+		    	}
 	    	});
 	    };
 	    
-		function post(action,formData,callBack,failBack,errorBack) {
-			var promise;
-			if($config.post == "json") {
-				if(action.indexOf('.json') != -1){
-					action = "json/" + action;
-					promise = get(action, callBack);
-				}
-			}else if($config.post == "do") {
-				formData = formData || {};
-				$.extend(formData, $config.clientHeader);
-				promise = $http({method: 'POST', url: action, data:formData, transformResponse: function(data) {
-					var jsonObj = angular.fromJson(data);
-					return jsonObj;
-				}}).
-				success(function(data ,status, headers, config){
-				    if (data && data.returnCode != null) {
-				    	var returnCode = data.returnCode;
-						if(returnCode != "AAAAAAA"){
-							if(typeof failBack == 'function'){
-								failBack(data, status, headers, config);
-							} else {
-								returnCheck(data);
-							}
-						} else {
-							if(typeof callBack=='function') {
-								callBack(data, status, headers, config);
-							}
-						}
-					} else {
-						if(typeof failBack == 'function'){
-							failBack(data, status, headers, config);
-						} else {
-							returnCheck(data);
-						}
-					}
-				}).error(function(data, status, headers, config) {
-					if(typeof errorBack == 'function') {
-						errorBack(data, status, headers, config);
-					} else {
-						alert("与服务器连接失败");
-					}
-				});
-			}
-			return promise;
+		function post(url, requestData, callback) {
+			return $http.post(url, requestData).success(function(data ,status, headers, config){
+	    		if(returnCheck(data)){
+		    		if(typeof callback == "function"){
+		    			callback(data, status, headers, config);
+		    		}
+		    	}
+	    	});
 		};
 		
 		return {
 			post: post,
 			get: get
+		};
+	}])
+
+	.factory("$restful", ["$config", "$http", function($config, $http) {
+		function dealErrorHttpRequest(data ,status, headers, config){
+			if(status == 400){
+    			alert('permission denied');
+    		}
+		}
+
+		function get(url, callback){
+	    	return $http.get(url).success(function(data ,status, headers, config){
+	    		if(typeof callback == "function"){
+	    			callback(data, status, headers, config);
+		    	}
+	    	}).error(function(data, status){ 
+	    		dealErrorHttpRequest(data, status); 
+	    	});
+	    }
+	    
+		function post(url, requestData, callback) {
+			return $http.post(url, requestData).success(function(data ,status, headers, config){
+	    		if(typeof callback == "function"){
+	    			callback(data, status, headers, config);
+		    	}
+	    	}).error(function(data, status){ 
+	    		dealErrorHttpRequest(data, status); 
+	    	});
+		}
+	    
+		function put(url, requestData, callback) {
+			return $http.put(url, requestData).success(function(data ,status, headers, config){
+	    		if(typeof callback == "function"){
+	    			callback(data, status, headers, config);
+		    	}
+	    	}).error(function(data, status){ 
+	    		dealErrorHttpRequest(data, status); 
+	    	});
+		}
+	    
+		function del(url, callback) {
+			return $http.put(url).success(function(data ,status, headers, config){
+	    		if(typeof callback == "function"){
+	    			callback(data, status, headers, config);
+		    	}
+	    	}).error(function(data, status){ 
+	    		dealErrorHttpRequest(data, status); 
+	    	});
+		}
+		
+		return {
+			post: post,
+			get: get,
+			put: put,
+			delete: del
 		};
 	}])
 });

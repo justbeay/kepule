@@ -1,17 +1,18 @@
 define(function() {
-	return ["viewUserCtrl", ["$scope", "$scopeData", "$location", "$http", function($scope, $scopeData, $location, $http) {
+	return ["viewUserCtrl", ["$scope", "$scopeData", "$dict", "$location", "$http", "$common", "$restful",
+	function($scope, $scopeData, $dict, $location, $http, $common, $restful) {
 		var id = $scopeData.get("id");
 
+		$scope.viewMore = id==$scope.loginInfo._loginId || $scope.loginInfo.loginRole=='9';
 		$scope.groupInfoList = [];
-		$http.get("/api/group").  //url request for production
-		// $http.post("/test/todo/groupList.php").  //url request for testing
-			success(function(data) {
-				for(var i=0; i<data.length; i++) {
-					data[i].id = data[i]._id;
-					data[i].name = data[i].type;
-					$scope.groupInfoList.push(data[i]);
-				}
-			});
+		$restful.get("/api/group", function(data) {  //url request for production
+//		$restful.get("/test/todo/groupList.php", function(data) {  //url request for testing
+			for(var i=0; i<data.length; i++) {
+				data[i].id = data[i]._id;
+				data[i].name = data[i].type;
+				$scope.groupInfoList.push(data[i]);
+			}
+		});
 
 		$scope.back = function() {
 			$location.path("userList");
@@ -20,24 +21,17 @@ define(function() {
 			$scopeData.set("id", id);
 			$location.path("editUser");
 		};
-		$http.get("/api/user/"+id).  //url request for production
-		// $http.get("/test/todo/viewUser.php?id="+id).  //url request for testing
-			success(function(data){
-				if(Object.keys(data).length > 0){
-					data.id = data._id;
-					data.group = $scope.getNameFromList($scope.groupInfoList, data.group);
-					data.position = $scope.getNameFromList($scope.userPositionInfoList, data.position);
-					data.status = $scope.getNameFromList($scope.userStatusInfoList, data.status);
-					data.role = $scope.getNameFromList($scope.userRoleInfoList, data.role);
-					$scope.user = data;
-				}else{
-					alert("信息获取失败");
-					$location.path("userList");
-				}
-			}).
-			error(function(){
-				alert("信息获取失败");
-				$location.path("userList");
-			});
+		$restful.get("/api/user/"+id, function(data){  //url request for production
+//		$restful.get("/test/todo/viewUser.php?id="+id, function(data){  //url request for testing
+			data.id = data._id;
+			data.group = $common.getTranslation($scope.groupInfoList, data.group);
+			data.sex = $dict.sex(data.sex);
+			data.residenceType = $dict.residenceType(data.residenceType);
+			data.marital = data.marital ? '已婚' : '未婚';
+			data.position = $dict.position(data.position);
+			data.status = $dict.status(data.status);
+			data.role = $dict.role(data.role);
+			$scope.user = data;
+		});
 	}]];
 });

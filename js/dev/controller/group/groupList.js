@@ -1,5 +1,5 @@
 define(function() {
-	return ["groupListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", function($scope, $scopeData, $location, $http, $route) {
+	return ["groupListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", "$restful", function($scope, $scopeData, $location, $http, $route, $restful) {
 		$scope.pageSize = 10;
 		$scope.pageCur = 1;
 		$scope.pageTotal = 1;
@@ -16,35 +16,30 @@ define(function() {
 			$location.path("viewGroup");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginRole != 9){
+			if($scope.loginInfo.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}
-			$http.delete("/api/group/"+id).  //url request for production
-			// $http.get("/test/todo/deleleGroup.php?id="+id).  //url request for testing
-				success(function($data){
-					alert('删除成功');
-					$route.reload();
-				}).
-				error(function(){
-					$route.reload();
-				});
+			$restful.delete("/api/group/"+id, function($data){  //url request for production
+//			$restful.get("/test/todo/deleleGroup.php?id="+id, function($data){  //url request for testing
+				alert('删除成功');
+				$route.reload();
+			});
 		};
 		$scope.getGroupList = function(pageno){
 			$scope.pageCur = pageno;
-			$http.get("/api/group").  //url request for production
-			// $http.get("/test/todo/groupList.php").  //url request for testing
-				success(function(data) {
-					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
-					$scope.groupList = [];
-					var rowStart =$scope.pageSize*($scope.pageCur-1);
-					var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
-					for(var i=rowStart; i<rowEnd; i++) {
-						data[i].id = data[i]._id;
-						data[i].name = data[i].type;
-						$scope.groupList.push(data[i]);
-					}
-				});
+			$restful.get("/api/group", function(data) {  //url request for production
+//			$restful.get("/test/todo/groupList.php", function(data) {  //url request for testing
+				$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
+				$scope.groupList = [];
+				var rowStart =$scope.pageSize*($scope.pageCur-1);
+				var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
+				for(var i=rowStart; i<rowEnd; i++) {
+					data[i].id = data[i]._id;
+					data[i].name = data[i].type;
+					$scope.groupList.push(data[i]);
+				}
+			});
 		};
 		$scope.searchPrevGroupList = function() {
 			$scope.getGroupList(Math.max($scope.pageCur-1, 1));

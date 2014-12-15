@@ -1,18 +1,24 @@
 define(function() {
-	return ["addTodoCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
+	return ["addTodoCtrl", ["$scope", "$location", "$http", "$restful", function($scope, $location, $http, $restful) {
 		$scope.back = function() {
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		$http.get("/api/group").  //url request for production
-		// $http.post("/test/todo/groupList.php").  //url request for testing
-			success(function(data) {
-				for(var i=0; i<data.length; i++) {
-					data[i].id = data[i]._id;
-					data[i].name = data[i].type;
-					$scope.groupInfoList.push(data[i]);
-				}
-			});
+		$restful.get("/api/group", function(data) {  //url request for production
+//		$restful.get("/test/todo/groupList.php", function(data) {  //url request for testing
+			for(var i=0; i<data.length; i++) {
+				data[i].id = data[i]._id;
+				data[i].name = data[i].type;
+				$scope.groupInfoList.push(data[i]);
+			}
+		});
+		$restful.get("/api/user", function(data) {  //url request for production
+//		$restful.get("/test/todo/userList.php", function(data) {  //url request for testing
+			for(var i=0; i<data.length; i++) {
+				data[i].id = data[i]._id;
+			}
+			$scope.executorList = data;
+		});
 		$scope.checkName = function() {
 			if(!$scope.name) {
 				return {
@@ -23,19 +29,6 @@ define(function() {
 				return {
 					flag: "tip",
 					msg: "请输入任务名"
-				}
-			}
-		};
-		$scope.checkCreater = function() {
-			if(!$scope.creater) {
-				return {
-					flag: "error",
-					msg: "创建人不能为空"
-				};
-			} else {
-				return {
-					flag: "tip",
-					msg: "请输入创建人"
 				}
 			}
 		};
@@ -66,28 +59,22 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= 0){
 				alert('Permission denied');
 				return;
 			}
 			$scope.TodoInfo = {
 				name: $scope.name,
 				description: $scope.description,
-				creater: $scope.creater,
+				creater: $scope.loginInfo._loginId,
 				executor: $scope.executor,
 				group: $scope.group
 			};
-			$http.post("/api/todo", $scope.TodoInfo).  //url request for production
-			// $http.post("/test/todo/addTodo.php", $scope.TodoInfo).  //url request for testing
-				success(function(data){
-					if(data.addStatus == '0'){
-						alert('任务添加成功');
-						$location.path('todoList');
-					}else{
-						alert('任务添加失败');
-					}
-				}
-			);
+			$restful.post("/api/todo", $scope.TodoInfo, function(data){  //url request for production
+//			$restful.post("/test/todo/addTodo.php", $scope.TodoInfo, function(data){  //url request for testing
+				alert('任务添加成功');
+				$location.path('todoList');
+			});
 		};
 	}]];
 });

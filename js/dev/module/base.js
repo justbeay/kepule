@@ -1,5 +1,5 @@
-﻿define(["angular", "angular-route", "config", "angular-cookies", "service", "component"], function(angular) {
-	return angular.module('ngView', ["ngRoute", "ngConfig", "ngCookies", "ngService", "ngComponent"])
+define(["angular", "angular-route", "config", "dict", "common", "angular-cookies", "service", "component"], function(angular) {
+	return angular.module('ngView', ["ngRoute", "ngConfig", "ngDict", "ngCommon", "ngCookies", "ngService", "ngComponent"])
 
 	.config(
 	    ["$routeProvider", "$httpProvider", "$controllerProvider", function($routeProvider, $httpProvider, $controllerProvider) {
@@ -191,55 +191,23 @@
 
 	}])
 
-	.controller("BaseCtrl", ["$scope", "$scopeData", "$http", "$cookies", "$location", "$window", function ($scope, $scopeData, $http, $cookies, $location, $window) {
-		$scope.userPositionInfoList = [//岗位
-			{id: 1, name: '小组负责人'},
-			{id: 2, name:'项目负责人'},
-			{id: 3, name:'开发人员'}
-		];
-		$scope.userStatusInfoList = [//用户状态
-			{id: 1, name: '正常'},
-			{id: 2, name:'离开项目组'},
-			{id: 3, name:'出差'},
-			{id: 4, name:'实习'},
-			{id: 5, name:'试用期'},
-			{id: 6, name:'其他'},
-			{id: 9, name:'离职'}
-		];
-		$scope.userRoleInfoList = [//角色
-			{id: 1, name: '平民'},
-			{id: 2, name:'平民'},
-			{id: 3, name:'平民'},
-			{id: 4, name:'平民'},
-			{id: 9, name:'系统管理员'}
-		];
-		$scope.encrySeed = "kepule_server";
-		$scope.getNameFromList = function(Infolist, id){
-			for(var i=0; i<Infolist.length; i++) {
-				if(Infolist[i].id == id) {
-					return Infolist[i].name;
-				}
-			}
-			return id;
-		}
+	.controller("BaseCtrl", ["$scope", "$scopeData", "$http", "$cookies", "$location", "$window", "$remote", function ($scope, $scopeData, $http, $cookies, $location, $window, $remote) {
 		$scope.logout = function(){
-			$http.post("/userBiz/logout").  //url request for production
-			// $http.post("/test/todo/logout.php").  //url request for testing
-				success(function(data){
-					alert("您已安全退出");
-					$cookies.isLogin = '';
-					$cookies._loginId = '';
-					$cookies.loginRole = '';
-					$location.path('todoList');
-					$window.location.reload();
-				}).
-				error(function(){
-					alert("注销失败");
-				});
+			$restful.post("/userBiz/logout", null, function(data){  //url request for production
+//			$remote.post("/test/todo/logout.php", null, function(data){  //url request for testing
+				alert("您已安全退出");
+				$cookies.isLogin = '';
+				$cookies._loginId = '';
+				$cookies.loginRole = '';
+				$location.path('todoList');
+				$scope.loginInfo = {};
+			});
 		}
-		$scope.isLogin = $cookies.isLogin ? 1 : 0;
-		$scope.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
-							? parseInt($cookies.loginRole) : -1;
+		$scope.loginInfo = $scope.loginInfo || {};
+		$scope.loginInfo.isLogin = $cookies.isLogin=='true';
+		$scope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
+				? parseInt($cookies.loginRole) : -1;
+		$scope.loginInfo._loginId = $cookies._loginId;
 	}])
 	;
 	

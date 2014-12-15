@@ -3,19 +3,7 @@
 		<h1>用户信息修改</h1>
 		<form name="form" novalidate>
 			<div class="wrapper">
-				<div class="pagination">&rarr;</div>
 				<div class="trans-table">
-					<div class="trans-line">
-						<div class="col-md-2">
-							<div class="trans-label">登录名</div>
-						</div>
-						<div class="col-md-10">
-							<div class="trans-ele">
-								<input type="text" class="input-text" name="loginId" ng-model="loginId" ng-chk="checkLoginId" formname="form" placeholder="登录名">
-							</div>
-						</div>
-						<div class="clear"></div>
-					</div>
 					<div class="trans-line">
 						<div class="col-md-2">
 							<div class="trans-label">姓名</div>
@@ -108,6 +96,200 @@
 								<select class="input-select" name="position" ng-model="position" ng-chk="checkPosition" formname="form">
 									<option ng-repeat="positionInfo in userPositionInfoList" value="{{positionInfo.id}}">{{positionInfo.name}}</option>
 								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">性别</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="sex" ng-model="sex" ng-chk="checkSex" formname="form">
+									<option ng-repeat="sexInfo in userSexInfoList" value="{{sexInfo.id}}">{{sexInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">证件号</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="idNo" ng-model="idNo" ng-chk="checkIdNo" formname="form" placeholder="证件号">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">生日</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="date" class="input-text" name="birthday" ng-model="birthday" ng-chk="checkBirthday" formname="form" placeholder="生日">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">籍贯</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="nativeplace" ng-model="nativeplace" ng-chk="checkNativeplace" formname="form" placeholder="籍贯">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">户口性质</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="residenceType" ng-model="residenceType" ng-chk="checkResidenceType" formname="form">
+									<option ng-repeat="residenceTypeInfo in userResidenceTypeInfoList" value="{{residenceTypeInfo.id}}">{{residenceTypeInfo.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">民族</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="nation" ng-model="nation" ng-chk="checkNation" formname="form" placeholder="民族">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">婚否</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<select class="input-select" name="marital" ng-model="marital" ng-chk="checkMarital" formname="form">
+									<option value="true">已婚</option>
+									<option value="false">未婚</option>
+								</select>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">政治面貌</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="political" ng-model="political" ng-chk="checkPolitical" formname="form" placeholder="政治面貌">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">学历</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="education" ng-model="education" ng-chk="checkEducation" formname="form" placeholder="学历">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">毕业院校</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="graduated" ng-model="graduated" ng-chk="checkGraduated" formname="form" placeholder="毕业院校">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">专业</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="major" ng-model="major" ng-chk="checkMajor" formname="form" placeholder="专业">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">毕业时间</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="graduationTime" ng-model="graduationTime" ng-chk="checkGraduationTime" formname="form" placeholder="毕业时间">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">工作年限</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="experience" ng-model="experience" ng-chk="checkExperience" formname="form" placeholder="工作年限">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">合同起始日期</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="date" class="input-text" name="contractBeginDate" ng-model="contractBeginDate" ng-chk="checkContractBeginDate" formname="form" placeholder="合同起始日期">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">合同终止日期</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="date" class="input-text" name="contractEndDate" ng-model="contractEndDate" ng-chk="checkContractEndDate" formname="form" placeholder="合同终止日期">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">手机号码</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="phoneno" ng-model="phoneno" ng-chk="checkPhoneno" formname="form" placeholder="手机号码">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line">
+						<div class="col-md-2">
+							<div class="trans-label">住址</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="text" class="input-text" name="address" ng-model="address" ng-chk="checkAddress" formname="form" placeholder="住址">
 							</div>
 						</div>
 						<div class="clear"></div>

@@ -1,5 +1,5 @@
 define(function() {
-	return ["viewGroupCtrl", ["$scope", "$scopeData", "$location", "$http", function($scope, $scopeData, $location, $http) {
+	return ["viewGroupCtrl", ["$scope", "$scopeData", "$location", "$http", "$restful", function($scope, $scopeData, $location, $http, $restful) {
 		var id = $scopeData.get("id");
 
 		$scope.back = function() {
@@ -9,21 +9,11 @@ define(function() {
 			$scopeData.set("id", id);
 			$location.path("editGroup");
 		};
-		$http.get("/api/group/"+id).  //url request for production
-		// $http.get("/test/todo/viewGroup.php?id="+id).  //url request for testing
-			success(function(data){
-				if(Object.keys(data).length > 0){
-					data.id = data._id;
-					data.name = data.type;
-					$scope.group = data;
-				}else{
-					alert("信息获取失败");
-					$location.path("groupList");
-				}
-			}).
-			error(function(){
-				alert("信息获取失败");
-				$location.path("groupList");
-			});
+		$restful.get("/api/group/"+id, function(data){  //url request for production
+//		$restful.get("/test/todo/viewGroup.php?id="+id, function(data){  //url request for testing
+			data.id = data._id;
+			data.name = data.type;
+			$scope.group = data;
+		});
 	}]];
 });

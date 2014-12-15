@@ -8,7 +8,8 @@ define(["angular"], function(angular) {
 			desktop: desktop,
 			post: "do",// 发请求交易改为do,请求json文件改为json
 			activex: false,
-			ieSign: false
+			ieSign: false,
+			encrySeed: "kepule_server"
 		};
 	});
 });

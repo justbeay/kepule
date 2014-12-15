@@ -3,7 +3,6 @@
 		<h1>任务详情</h1>
 		<form name="form" novalidate>
 			<div class="wrapper">
-				<div class="pagination">&rarr;</div>
 				<div class="trans-table">
 					<div class="trans-line">
 						<div class="col-md-2">
@@ -33,7 +32,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<div class="trans-text">{{todo.creater}}</div>
+								<div class="trans-text">{{todo.creater.name}}</div>
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -44,7 +43,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<div class="trans-text">{{todo.executor}}</div>
+								<div class="trans-text">{{todo.executor.name}}</div>
 							</div>
 						</div>
 						<div class="clear"></div>

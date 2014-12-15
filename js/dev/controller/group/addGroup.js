@@ -1,5 +1,5 @@
 define(function() {
-	return ["addGroupCtrl", ["$scope", "$location", "$http", function($scope, $location, $http) {
+	return ["addGroupCtrl", ["$scope", "$location", "$http", "$restful", function($scope, $location, $http, $restful) {
 		$scope.back = function() {
 			$location.path("groupList");
 		};
@@ -17,24 +17,18 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginRole != 9){
+			if($scope.loginInfo.loginRole != 9){
 				alert('Permission denied');
 				return;
 			}
 			$scope.GroupInfo = {
 				type: $scope.name,
 			};
-			$http.post("/api/group", $scope.GroupInfo).  //url request for production
-			// $http.post("/test/todo/addGroup.php", $scope.GroupInfo).  //url request for testing
-				success(function(data){
-					if(data.addStatus == '0'){
-						alert('项目组添加成功');
-						$location.path('userList');
-					}else{
-						alert('项目组添加失败');
-					}
-				}
-			);
+			$restful.post("/api/group", $scope.GroupInfo, function(data){  //url request for production
+//			$restful.post("/test/todo/addGroup.php", $scope.GroupInfo, function(data){  //url request for testing
+				alert('项目组添加成功');
+				$location.path('userList');
+			});
 		};
 	}]];
 });

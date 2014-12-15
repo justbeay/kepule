@@ -1,6 +1,6 @@
 ﻿define(function() {
-	return ["editTodoCtrl", ["$scope", "$scopeData", "$location", "$http", function($scope, $scopeData, $location, $http) {
-		if($scope.loginRole <= 0){
+	return ["editTodoCtrl", ["$scope", "$scopeData", "$location", "$http", "$restful", function($scope, $scopeData, $location, $http, $restful) {
+		if($scope.loginInfo.loginRole <= 0){
 			alert('Permission denied');
 			return;
 		}
@@ -9,41 +9,50 @@
 			$location.path("todoList");
 		};
 		$scope.groupInfoList = [];
-		$http.get("/api/group").  //url request for production
-		// $http.post("/test/todo/groupList.php").  //url request for testing
-			success(function(data) {
-				for(var i=0; i<data.length; i++) {
-					data[i].id = data[i]._id;
-					data[i].name = data[i].type;
-					$scope.groupInfoList.push(data[i]);
+		$restful.get("/api/group", function(data) {  //url request for production
+//		$restful.get("/test/todo/groupList.php", function(data) {  //url request for testing
+			for(var i=0; i<data.length; i++) {
+				data[i].id = data[i]._id;
+				data[i].name = data[i].type;
+				$scope.groupInfoList.push(data[i]);
+			}
+		});
+		$restful.get("/api/user", function(data) {  //url request for production
+//		$restful.get("/test/todo/userList.php", function(data) {  //url request for testing
+			for(var i=0; i<data.length; i++) {
+				data[i].id = data[i]._id;
+			}
+			$scope.executorList = data;
+		});
+		$restful.get("/api/todo/"+$scope.id, function(data){  //url request for production
+//		$restful.get("/test/todo/viewTodo.php?id="+$scope.id, function(data){  //url request for testing
+			$scope.id = data._id;
+			$scope.name = data.name;
+			$scope.description = data.description;
+			$scope.creater = data.creater.name;
+			$scope.executor = data.executor._id;
+			$scope.done = data.done ? 1 : 0;
+			$scope.group = data.group;
+			for(var i=0; i<$scope.groupInfoList.length; i++) {
+				if($scope.groupInfoList[i]._id == $scope.group) {
+					$scope.group = $scope.groupInfoList[i].name;
+					break;
 				}
-			});
-		$http.get("/api/todo/"+$scope.id).  //url request for production
-		// $http.get("/test/todo/viewTodo.php?id="+$scope.id).  //url request for testing
-			success(function($data){
-				if(Object.keys($data).length > 0){
-					$scope.id = $data.id;
-					$scope.name = $data.name;
-					$scope.description = $data.description;
-					$scope.creater = $data.creater;
-					$scope.executor = $data.executor;
-					$scope.done = $data.done ? 1 : 0;
-					$scope.group = $data.group;
-					for(var i=0; i<$scope.groupInfoList.length; i++) {
-						if($scope.groupInfoList[i]._id == $scope.group) {
-							$scope.group = $scope.groupInfoList[i].name;
-							break;
-						}
-					}
-				}else{
-					alert("信息获取失败");
-					$location.path("todoList");
+			}
+		});
+		$scope.checkExecutor = function() {
+			if(!$scope.executor) {
+				return {
+					flag: "error",
+					msg: "执行人不能为空"
+				};
+			} else {
+				return {
+					flag: "tip",
+					msg: "请输入执行人"
 				}
-			}).
-			error(function(){
-				alert("信息获取失败");
-				$location.path("todoList");
-			});
+			}
+		};
 		$scope.checkDone = function() {
 			if(!$scope.done) {
 				return {
@@ -58,26 +67,21 @@
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= 0){
 				alert('Permission denied');
 				return;
 			}
 			$scope.TodoInfo = {
 				name: $scope.name,
+				executor: $scope.executor,
 				description: $scope.description,
 				done: $scope.done
 			};
-			$http.put("/api/todo/"+$scope.id, $scope.TodoInfo).  //url request for production
-			// $http.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo).  //url request for testing
-				success(function(data) {
-					if(data.addStatus == '0'){
-						alert('任务更新成功');
-						$location.path('todoList');
-					}else{
-						alert('任务更新失败');
-					}
-				}
-			);
+			$restful.put("/api/todo/"+$scope.id, $scope.TodoInfo, function(data) {  //url request for production
+//			$restful.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo, function(data) {  //url request for testing
+				alert('任务更新成功');
+				$location.path('todoList');
+			});
 		};
 	}]];
 });

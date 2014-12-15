@@ -3,7 +3,6 @@
 		<h1>编辑任务</h1>
 		<form name="form" novalidate>
 			<div class="wrapper">
-				<div class="pagination">&rarr;</div>
 				<div class="trans-table">
 					<div class="trans-line">
 						<div class="col-md-2">
@@ -22,7 +21,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="description" ng-model="description" formname="form" placeholder="任务详情">
+								<textarea class="input-textarea" name="description" ng-model="description" formname="form" placeholder="任务详情"></textarea>
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -44,7 +43,9 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<div class="trans-text">{{executor}}</div>
+								<select class="input-select" name="executor" ng-model="executor" ng-chk="checkExecutor" formname="form">
+									<option ng-repeat="userInfo in executorList" value="{{userInfo.id}}">{{userInfo.name}}</option>
+								</select>
 							</div>
 						</div>
 						<div class="clear"></div>

@@ -1,5 +1,5 @@
 define(function() {
-	return ["TodoListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", function($scope, $scopeData, $location, $http, $route) {
+	return ["TodoListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", "$restful", function($scope, $scopeData, $location, $http, $route, $restful) {
 		$scope.pageSize = 10;
 		$scope.pageCur = 1;
 		$scope.pageTotal = 1;
@@ -18,19 +18,15 @@ define(function() {
 			$location.path("searchTodo");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= 0){
 				alert('Permission denied');
 				return;
 			}
-			$http.delete("/api/todo/"+$scope.id).  //url request for production
-			// $http.get("/test/todo/viewTodo.php?id="+$scope.id).  //url request for testing
-				success(function($data){
-					alert('删除成功');
-					$route.reload();
-				}).
-				error(function(){
-					$route.reload();
-				});
+			$restful.delete("/api/todo/"+$scope.id, function($data){  //url request for production
+//			$restful.get("/test/todo/viewTodo.php?id="+$scope.id, function($data){  //url request for testing
+				alert('删除成功');
+				$route.reload();
+			});
 		};
 		$scope.query = function(pageno){
 			$scope.pageCur = pageno;
@@ -41,19 +37,18 @@ define(function() {
 				done: $scopeData.get('done'),
 				group: $scopeData.get('group')
 			};
-			$http.get("/api/todo", $scope.SearchInfo).  //url request for production
-			// $http.post("/test/todo/todoList.php", $scope.SearchInfo).  //url request for testing
-				success(function(data) {
-					$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
-					$scope.todoList = [];
-					var rowStart =$scope.pageSize*($scope.pageCur-1);
-					var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
-					for(var i=rowStart; i<rowEnd; i++) {
-						data[i].id = data[i]._id;
-						data[i].done = data[i].done ? "已完成" : "未完成";
-						$scope.todoList.push(data[i]);
-					}
-				});
+			$restful.post("/api/todo", $scope.SearchInfo, function(data) {  //url request for production
+//			$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
+				$scope.pageTotal = Math.ceil(data.length/$scope.pageSize);
+				$scope.todoList = [];
+				var rowStart =$scope.pageSize*($scope.pageCur-1);
+				var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
+				for(var i=rowStart; i<rowEnd; i++) {
+					data[i].id = data[i]._id;
+					data[i].done = data[i].done ? "已完成" : "未完成";
+					$scope.todoList.push(data[i]);
+				}
+			});
 		};
 		$scope.queryPrev = function() {
 			$scope.query(Math.max($scope.pageCur-1, 1));
@@ -61,6 +56,15 @@ define(function() {
 		$scope.queryNext = function() {
 			$scope.query(Math.min($scope.pageCur+1, $scope.pageTotal));
 		}
+		// 若不是从搜索页面过来则先清空搜索条件然后再查询列表
+		if(!$scopeData.get('isSearch')){
+			$scopeData.set('name', undefined);
+			$scopeData.set('creater', undefined);
+			$scopeData.set('executor', undefined);
+			$scopeData.set('done', undefined);
+			$scopeData.set('group', undefined);
+		}
+		$scopeData.set('isSearch', undefined);
 		$scope.query($scope.pageCur);
 	}]];
 });

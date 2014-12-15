@@ -50,6 +50,8 @@
 			component: "module/component",
 			config: "module/config",
 			service: "module/service",
+			dict: "module/dict",
+			common: "module/common",
 			/**
 			 * controller
 			 */

@@ -27,8 +27,8 @@
 	                <li ng-click="locate('#/groupList')">项目组管理</li>
 	            </ul>
 	            <ul class="navbar-right">
-	                <li ng-show="isLogin" ng-click="logout()">注销</li>
-	                <li ng-hide="isLogin" ng-click="locate('#/login')">登录</li>
+	                <li ng-show="loginInfo.isLogin" ng-click="logout()">注销</li>
+	                <li ng-hide="loginInfo.isLogin" ng-click="locate('#/login')">登录</li>
 	            </ul>
 	        </div>
 	    </div>

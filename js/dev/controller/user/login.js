@@ -1,6 +1,7 @@
 define(["cryptojs-sha256"], function(crypto) {
-	return ["loginCtrl", ["$scope", "$location", "$http", "$cookies", "$window", function($scope, $location, $http, $cookies, $window) {
-		if($scope.isLogin){
+	return ["loginCtrl", ["$scope", "$location", "$config", "$http", "$cookies", "$remote", 
+	function($scope, $location, $config, $http, $cookies, $remote) {
+		if($scope.loginInfo.isLogin){
 			$location.path("todoList");
 		}
 		$scope.back = function() {
@@ -36,30 +37,26 @@ define(["cryptojs-sha256"], function(crypto) {
 		$scope.submit = function() {
 			var loginTime = new Date().getTime();
 			var password = crypto.SHA256($scope.password).toString();
-			password = crypto.HmacSHA256(password, $scope.encrySeed).toString();
+			password = crypto.HmacSHA256(password, $config.encrySeed).toString();
 			password = crypto.HmacSHA256(password, $scope.name+":"+loginTime).toString();
 			$scope.UserInfo = {
 				loginId: $scope.name,
 				password: password,
 				loginTime: loginTime
 			};
-			$http.post("/userBiz/login", $scope.UserInfo).  //url request for production
-//			$http.post("/test/todo/login.php", $scope.UserInfo).  //url request for testing
-				success(function(data){
-					if(!data.error){
-						$cookies.isLogin = true;
-						$cookies._loginId = data._id;
-						$cookies.loginRole = data.role;
-						alert('用户登录成功');
-						$location.path('todoList');
-						$window.location.reload();
-					}else{
-						alert(data.error.msg ? data.error.msg : '用户登录失败');
-					}
-				}).
-				error(function(){
-					alert('用户登录失败');
-				});
+			$restful.post("/userBiz/login", $scope.UserInfo, function(data){  //url request for production
+//			$remote.post("/test/todo/login.php", $scope.UserInfo, function(data){  //url request for testing
+				alert('用户登录成功');
+				$cookies.isLogin = true;
+				$cookies._loginId = data._id;
+				$cookies.loginRole = data.role;
+				$scope.loginInfo = $scope.loginInfo || {};
+				$scope.loginInfo.isLogin = true;
+				$scope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
+						? parseInt($cookies.loginRole) : -1;
+				$scope.loginInfo._loginId = data._id;
+				$location.path('todoList');
+			});
 		};
 	}]];
 });
