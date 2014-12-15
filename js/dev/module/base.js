@@ -154,8 +154,8 @@ define(["angular", "angular-route", "config", "dict", "common", "angular-cookies
 	)
 
 	/** 初始化ngView对象，初始化定义$rootScope相关方法 **/
-	.run(['$rootScope', '$config', "$route", "$remote", "$restful",
-	function($rootScope, $config, $route, $remote, $restful) {
+	.run(['$rootScope', '$config', "$route", "$remote",
+	function($rootScope, $config, $route, $remote) {
 
 		$rootScope.post2SRV = function(action,formData,callBack,failBack) {
 			return $remote.post(action,formData,function(data) {
@@ -191,7 +191,7 @@ define(["angular", "angular-route", "config", "dict", "common", "angular-cookies
 
 	}])
 
-	.controller("BaseCtrl", ["$scope", "$scopeData", "$http", "$cookies", "$location", "$window", "$remote", function ($scope, $scopeData, $http, $cookies, $location, $window, $remote) {
+	.controller("BaseCtrl", ["$scope", "$scopeData", "$http", "$cookies", "$location", "$window", "$remote", "$restful", function ($scope, $scopeData, $http, $cookies, $location, $window, $remote, $restful) {
 		$scope.logout = function(){
 			$restful.post("/userBiz/logout", null, function(data){  //url request for production
 //			$restful.post("/test/todo/logout.php", null, function(data){  //url request for testing
