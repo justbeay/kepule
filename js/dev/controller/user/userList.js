@@ -49,7 +49,6 @@ define(function() {
 					data[i].group = $common.getTranslation($scope.groupInfoList, data[i].group._id);
 					data[i].position = $dict.position(data[i].position);
 					data[i].status = $dict.status(data[i].status);
-					data[i].role = $dict.role(data[i].role);
 					$scope.userList.push(data[i]);
 				}
 			});

@@ -25,7 +25,7 @@ define(["cryptojs-sha256"], function(crypto) {
 			$scope.name = data.name;
 			$scope.status = data.status;
 			$scope.email = data.email;
-			$scope.group = data.group;
+			$scope.group = data.group._id;
 			$scope.role = data.role;
 			$scope.position = data.position;
 			$scope.sex = data.sex;

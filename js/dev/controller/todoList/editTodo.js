@@ -34,7 +34,7 @@
 			$scope.done = data.done ? 1 : 0;
 			$scope.group = data.group;
 			for(var i=0; i<$scope.groupInfoList.length; i++) {
-				if($scope.groupInfoList[i]._id == $scope.group) {
+				if($scope.groupInfoList[i]._id == $scope.group._id) {
 					$scope.group = $scope.groupInfoList[i].name;
 					break;
 				}

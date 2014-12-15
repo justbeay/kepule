@@ -13,7 +13,6 @@
 				<th>所属项目组</th>
 				<th>岗位</th>
 				<th>状态</th>
-				<th>权限</th>
 				<th>操作</th>
 			</tr>
 			</thead>
@@ -22,8 +21,7 @@
 				<td>{{user.group}}</td>
 				<td>{{user.position}}</td>
 				<td>{{user.status}}</td>
-				<td>{{user.role}}</td>
-				<td><a ng-click="view(user.id)">查看</a>&nbsp;|&nbsp;<a ng-click="edit(user.id)">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(user.id)">删除</a></td>
+				<td><a ng-click="view(user.id)" ng-show="loginInfo.isLogin">查看</a>&nbsp;|&nbsp;<a ng-click="edit(user.id)" ng-show="loginInfo.loginRole=='9' || loginInfo._loginId==user.id">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(user.id)" ng-show="loginInfo.loginRole=='9' && loginInfo._loginId!=user.id">删除</a></td>
 			</tr>
 		</table>
 		

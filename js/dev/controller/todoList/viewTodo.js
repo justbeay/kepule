@@ -26,7 +26,7 @@ define(function() {
 			$scope.todo = $data;
 			$scope.todo.done = $scope.todo.done ? "已完成" : "未完成";
 			for(var i=0; i<$scope.groupInfoList.length; i++) {
-				if($scope.groupInfoList[i]._id == $scope.todo.group) {
+				if($scope.groupInfoList[i]._id == $scope.todo.group._id) {
 					$scope.todo.group = $scope.groupInfoList[i].name;
 					break;
 				}

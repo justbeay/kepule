@@ -22,8 +22,9 @@
 				<td ng-show="loginInfo.isLogin"><a ng-click="view(todo.id)">{{todo.name}}</a></td>
 				<td>{{todo.creater.name}}</td>
 				<td>{{todo.executor.name}}</td>
-				<td>{{todo.done}}</td>
-				<td><a ng-click="view(todo.id)" ng-show="loginInfo.isLogin">查看</a>&nbsp;|&nbsp;<a ng-click="edit(todo.id)" ng-show="loginInfo.isLogin">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(todo.id)" ng-show="loginInfo.isLogin">删除</a></td>
+				<td ng-show="todo.done">已完成</td>
+				<td ng-hide="todo.done">未完成</td>
+				<td><a ng-click="view(todo.id)" ng-show="loginInfo.isLogin">查看</a>&nbsp;|&nbsp;<a ng-click="edit(todo.id)" ng-show="loginInfo.isLogin">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(todo.id)" ng-show="loginInfo.isLogin">删除</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, true)" ng-show="loginInfo.isLogin && !todo.done">标记为完成</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, false)" ng-show="loginInfo.isLogin && todo.done">标记为未完成</a></td>
 			</tr>
 		</table>
 		

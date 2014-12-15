@@ -6,17 +6,6 @@
 				<div class="trans-table">
 					<div class="trans-line">
 						<div class="col-md-2">
-							<div class="trans-label">登录名</div>
-						</div>
-						<div class="col-md-10">
-							<div class="trans-ele">
-								<div class="trans-text">{{user.loginId}}</div>
-							</div>
-						</div>
-						<div class="clear"></div>
-					</div>
-					<div class="trans-line">
-						<div class="col-md-2">
 							<div class="trans-label">姓名</div>
 						</div>
 						<div class="col-md-10">
@@ -280,7 +269,7 @@
 						<div class="clear"></div>
 					</div>
 					<div class="trans-line textCenter">
-						<div class="button" ng-sub="edit()" formname="form">编  辑</div>
+						<div class="button" ng-sub="edit()" formname="form" ng-show="loginInfo.loginRole=='9' || loginInfo._loginId==user.id">编  辑</div>
 						<div class="button" ng-click="back()" formname="form">返  回</div>
 					</div>
 				</div>

@@ -28,6 +28,20 @@ define(function() {
 				$route.reload();
 			});
 		};
+		$scope.changeDone = function(id, isDone) {
+			if($scope.loginInfo.loginRole <= 0){
+				alert('Permission denied');
+				return;
+			}
+			$scope.TodoInfo = {
+				done: isDone
+			};
+			$restful.put("/api/todo/"+$scope.id, $scope.TodoInfo, function(data) {  //url request for production
+//			$restful.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo, function(data) {  //url request for testing
+				alert('任务更新成功');
+				$location.path('todoList');
+			});
+		};
 		$scope.query = function(pageno){
 			$scope.pageCur = pageno;
 			$scope.SearchInfo = {
@@ -44,18 +58,17 @@ define(function() {
 				var rowEnd = Math.min($scope.pageSize*$scope.pageCur, data.length);
 				for(var i=rowStart; i<rowEnd; i++) {
 					data[i].id = data[i]._id;
-					data[i].done = data[i].done ? "已完成" : "未完成";
 					$scope.todoList.push(data[i]);
 				}
 			}
 			if($scopeData.get('isSearch')){
 				$restful.post("/todoBiz/list", $scope.SearchInfo, function(data) {  //url request for production
-	//			$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
+//				$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
 					dealQueryResult(data);
 				});
 			}else{
 				$restful.get("/api/todo", function(data) {  //url request for production
-	//			$restful.get("/test/todo/todoList.php", function(data) {  //url request for testing
+//				$restful.get("/test/todo/todoList.php", function(data) {  //url request for testing
 					dealQueryResult(data);
 				});
 			}
