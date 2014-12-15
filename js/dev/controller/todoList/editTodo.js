@@ -1,6 +1,6 @@
 ﻿define(function() {
 	return ["editTodoCtrl", ["$scope", "$scopeData", "$location", "$http", "$restful", function($scope, $scopeData, $location, $http, $restful) {
-		if($scope.loginInfo.loginRole <= 0){
+		if($scope.loginInfo.loginRole <= '0'){
 			alert('Permission denied');
 			return;
 		}
@@ -67,7 +67,7 @@
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginInfo.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}

@@ -59,7 +59,7 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginInfo.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}

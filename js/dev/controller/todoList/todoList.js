@@ -18,7 +18,7 @@ define(function() {
 			$location.path("searchTodo");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginInfo.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}
@@ -29,15 +29,15 @@ define(function() {
 			});
 		};
 		$scope.changeDone = function(id, isDone) {
-			if($scope.loginInfo.loginRole <= 0){
+			if($scope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}
 			$scope.TodoInfo = {
 				done: isDone
 			};
-			$restful.put("/api/todo/"+$scope.id, $scope.TodoInfo, function(data) {  //url request for production
-//			$restful.post("/test/todo/editTodoInfo.php?id="+$scope.id, $scope.TodoInfo, function(data) {  //url request for testing
+			$restful.put("/api/todo/"+id, $scope.TodoInfo, function(data) {  //url request for production
+//			$restful.post("/test/todo/editTodoInfo.php?id="+id, $scope.TodoInfo, function(data) {  //url request for testing
 				alert('任务更新成功');
 				$location.path('todoList');
 			});
