@@ -4,7 +4,7 @@
 			<h1 class="float-left">Todo List</h1>
 			<div class="header-right">
 				<button class="button" ng-click="search()">搜  索</button>
-				<button class="button" ng-click="add()" ng-show="loginInfo.isLogin">新增任务</button>
+				<button class="button" ng-click="add()" ng-show="$root.loginInfo.isLogin">新增任务</button>
 			</div>
 		</div>
 		<table>
@@ -18,13 +18,13 @@
 			</tr>
 			</thead>
 			<tr ng-repeat="todo in todoList">
-				<td ng-hide="loginInfo.isLogin">{{todo.name}}</td>
-				<td ng-show="loginInfo.isLogin"><a ng-click="view(todo.id)">{{todo.name}}</a></td>
+				<td ng-hide="$root.loginInfo.isLogin">{{todo.name}}</td>
+				<td ng-show="$root.loginInfo.isLogin"><a ng-click="view(todo.id)">{{todo.name}}</a></td>
 				<td>{{todo.creater.name}}</td>
 				<td>{{todo.executor.name}}</td>
 				<td ng-show="todo.done">已完成</td>
 				<td ng-hide="todo.done">未完成</td>
-				<td><a ng-click="view(todo.id)" ng-show="loginInfo.isLogin">查看</a>&nbsp;|&nbsp;<a ng-click="edit(todo.id)" ng-show="loginInfo.isLogin">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(todo.id)" ng-show="loginInfo.isLogin">删除</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, true)" ng-show="loginInfo.isLogin && !todo.done">标记为完成</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, false)" ng-show="loginInfo.isLogin && todo.done">标记为未完成</a></td>
+				<td><a ng-click="view(todo.id)" ng-show="$root.loginInfo.isLogin">查看</a>&nbsp;|&nbsp;<a ng-click="edit(todo.id)" ng-show="$root.loginInfo.isLogin">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(todo.id)" ng-show="$root.loginInfo.isLogin">删除</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, true)" ng-show="$root.loginInfo.isLogin && !todo.done">标记为完成</a>&nbsp;|&nbsp;<a ng-click="changeDone(todo.id, false)" ng-show="$root.loginInfo.isLogin && todo.done">标记为未完成</a></td>
 			</tr>
 		</table>
 		

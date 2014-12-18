@@ -1,6 +1,6 @@
 define(["cryptojs-sha256"], function(crypto) {
-	return ["editUserCtrl", ["$scope", "$scopeData", "$dict", "$config", "$location", "$http", "$restful", "$common", 
-	function($scope, $scopeData, $dict, $config, $location, $http, $restful, $common) {
+	return ["editUserCtrl", ["$scope", "$rootScope", "$scopeData", "$dict", "$config", "$location", "$http", "$restful", "$common", 
+	function($scope, $rootScope, $scopeData, $dict, $config, $location, $http, $restful, $common) {
 		var id = $scopeData.get("id");
 
 		$scope.groupInfoList = [];
@@ -102,7 +102,7 @@ define(["cryptojs-sha256"], function(crypto) {
 			$location.path("userList");
 		};
 		$scope.submit = function() {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}

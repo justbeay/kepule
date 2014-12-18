@@ -1,5 +1,6 @@
 define(function() {
-	return ["groupListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", "$restful", function($scope, $scopeData, $location, $http, $route, $restful) {
+	return ["groupListCtrl", ["$scope", "$rootScope", "$scopeData", "$location", "$http", "$route", "$restful", 
+	function($scope, $rootScope, $scopeData, $location, $http, $route, $restful) {
 		$scope.pageSize = 10;
 		$scope.pageCur = 1;
 		$scope.pageTotal = 1;
@@ -16,7 +17,7 @@ define(function() {
 			$location.path("viewGroup");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}

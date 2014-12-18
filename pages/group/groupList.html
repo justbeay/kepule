@@ -3,7 +3,7 @@
 		<div>
 			<h1 class="float-left">项目组列表</h1>
 			<div class="header-right">
-				<button class="button" ng-show="loginInfo.loginRole=='9'" ng-click="add()">新增</button>
+				<button class="button" ng-show="$root.loginInfo.loginRole=='9'" ng-click="add()">新增</button>
 			</div>
 		</div>
 		<table>
@@ -15,7 +15,7 @@
 			</thead>
 			<tr ng-repeat="group in groupList">
 				<td><a ng-click="view(group.id)">{{group.name}}</a></td>
-				<td><a ng-click="view(group.id)">查看</a>&nbsp;|&nbsp;<a ng-click="edit(group.id)"  ng-show="loginInfo.loginRole=='9'">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(group.id)" ng-show="loginInfo.loginRole=='9'">删除</a></td>
+				<td><a ng-click="view(group.id)">查看</a>&nbsp;|&nbsp;<a ng-click="edit(group.id)"  ng-show="$root.loginInfo.loginRole=='9'">编辑</a>&nbsp;|&nbsp;<a ng-click="delete(group.id)" ng-show="$root.loginInfo.loginRole=='9'">删除</a></td>
 			</tr>
 		</table>
 		

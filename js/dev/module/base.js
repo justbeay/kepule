@@ -220,23 +220,25 @@ define(["angular", "angular-route", "config", "dict", "common", "angular-cookies
 
 	}])
 
-	.controller("BaseCtrl", ["$scope", "$scopeData", "$http", "$cookies", "$location", "$window", "$remote", "$restful", function ($scope, $scopeData, $http, $cookies, $location, $window, $remote, $restful) {
+	.controller("BaseCtrl", ["$scope", "$rootScope", "$http", "$cookies", "$location", "$window", "$remote", "$restful", 
+		function ($scope, $rootScope, $http, $cookies, $location, $window, $remote, $restful) {
 		$scope.logout = function(){
 			$remote.post("/userBiz/logout", null, function(data){  //url request for production
 //			$remote.post("/test/todo/logout.php", null, function(data){  //url request for testing
 				alert("您已安全退出");
 				$cookies.isLogin = '';
 				$cookies._loginId = '';
+				$cookies.loginId = '';
 				$cookies.loginRole = '';
 				$location.path('todoList');
-				$scope.loginInfo = {};
+				$rootScope.loginInfo = {};
 			});
 		}
-		$scope.loginInfo = $scope.loginInfo || {};
-		$scope.loginInfo.isLogin = $cookies.isLogin=='true';
-		$scope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
+		$rootScope.loginInfo = $rootScope.loginInfo || {};
+		$rootScope.loginInfo.isLogin = $cookies.isLogin=='true';
+		$rootScope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
 				? parseInt($cookies.loginRole) : -1;
-		$scope.loginInfo._loginId = $cookies._loginId;
+		$rootScope.loginInfo._loginId = $cookies._loginId;
 	}])
 	;
 	

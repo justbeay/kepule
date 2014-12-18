@@ -46,10 +46,21 @@ define(["angular", "config"], function(angular) {
 		};
 	})
 	
-	.factory("$remote", ["$config", "$http", function($config, $http) {
+	.factory("$remote", ["$rootScope", "$config", "$http", "$cookies", "$location", function($rootScope, $config, $http, $cookies, $location) {
 		function dealError(errorCallback, data, status, headers, config){
-			if(status == 400 && typeof errorCallback != "function"){
-				alert(data);
+			if(status == 400){
+				if(data == "需要登录才能操作"){
+					$cookies.isLogin = '';
+					$cookies._loginId = '';
+					$cookies.loginId = '';
+					$cookies.loginRole = '';
+					$rootScope.loginInfo = {};
+					$location.path('login');
+				}else if(typeof errorCallback != "function"){
+					alert(data);
+				}else{
+					errorCallback(data, status, headers, config);
+				}
     		}else if(typeof errorCallback == "function"){
 				errorCallback(data, status, headers, config);
 			}
@@ -79,10 +90,21 @@ define(["angular", "config"], function(angular) {
 		};
 	}])
 
-	.factory("$restful", ["$config", "$http", function($config, $http) {
+	.factory("$restful", ["$rootScope", "$config", "$http", "$cookies", "$location", function($rootScope, $config, $http, $cookies, $location) {
 		function dealError(errorCallback, data, status, headers, config){
-			if(status == 400 && typeof errorCallback != "function"){
-				alert(data);
+			if(status == 400){
+				if(data == "需要登录才能操作"){
+					$cookies.isLogin = '';
+					$cookies._loginId = '';
+					$cookies.loginId = '';
+					$cookies.loginRole = '';
+					$rootScope.loginInfo = {};
+					$location.path('login');
+				}else if(typeof errorCallback != "function"){
+					alert(data);
+				}else{
+					errorCallback(data, status, headers, config);
+				}
     		}else if(typeof errorCallback == "function"){
 				errorCallback(data, status, headers, config);
 			}

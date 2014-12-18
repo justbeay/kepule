@@ -1,5 +1,6 @@
 define(function() {
-	return ["editGroupCtrl", ["$scope", "$scopeData", "$location", "$http", "$restful", function($scope, $scopeData, $location, $http, $restful) {
+	return ["editGroupCtrl", ["$scope", "$rootScope", "$scopeData", "$location", "$http", "$restful", 
+	function($scope, $rootScope, $scopeData, $location, $http, $restful) {
 		$scope.id = $scopeData.get("id");
 		$scope.back = function() {
 			$location.path("groupList");
@@ -23,7 +24,7 @@ define(function() {
 			$scope.name = data.type;
 		});
 		$scope.submit = function() {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}

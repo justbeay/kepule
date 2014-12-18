@@ -1,5 +1,6 @@
 define(function() {
-	return ["TodoListCtrl", ["$scope", "$scopeData", "$location", "$http", "$route", "$restful", function($scope, $scopeData, $location, $http, $route, $restful) {
+	return ["TodoListCtrl", ["$scope", "$rootScope", "$scopeData", "$location", "$http", "$route", "$restful", 
+	function($scope, $rootScope, $scopeData, $location, $http, $route, $restful) {
 		$scope.pageSize = 10;
 		$scope.pageCur = 1;
 		$scope.pageTotal = 1;
@@ -18,7 +19,7 @@ define(function() {
 			$location.path("searchTodo");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginInfo.loginRole <= '0'){
+			if($rootScope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}
@@ -29,7 +30,7 @@ define(function() {
 			});
 		};
 		$scope.changeDone = function(id, isDone) {
-			if($scope.loginInfo.loginRole <= '0'){
+			if($rootScope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}

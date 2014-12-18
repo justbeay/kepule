@@ -1,5 +1,5 @@
 define(function() {
-	return ["addTodoCtrl", ["$scope", "$location", "$http", "$restful", function($scope, $location, $http, $restful) {
+	return ["addTodoCtrl", ["$scope", "$rootScope", "$location", "$http", "$restful", function($scope, $rootScope, $location, $http, $restful) {
 		$scope.back = function() {
 			$location.path("todoList");
 		};
@@ -59,14 +59,14 @@ define(function() {
 			}
 		};
 		$scope.submit = function() {
-			if($scope.loginInfo.loginRole <= '0'){
+			if($rootScope.loginInfo.loginRole <= '0'){
 				alert('Permission denied');
 				return;
 			}
 			$scope.TodoInfo = {
 				name: $scope.name,
 				description: $scope.description,
-				creater: $scope.loginInfo._loginId,
+				creater: $rootScope.loginInfo._loginId,
 				executor: $scope.executor,
 				group: $scope.group
 			};

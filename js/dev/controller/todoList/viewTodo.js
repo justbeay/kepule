@@ -1,7 +1,8 @@
 define(function() {
-	return ["viewTodoCtrl", ["$scope", "$scopeData", "$location", "$http", "$restful", function($scope, $scopeData, $location, $http, $restful) {
+	return ["viewTodoCtrl", ["$scope", "$rootScope", "$scopeData", "$location", "$http", "$restful", 
+	function($scope, $rootScope, $scopeData, $location, $http, $restful) {
 		
-		if($scope.loginInfo.loginRole <= '0'){
+		if($rootScope.loginInfo.loginRole <= '0'){
 			alert('Permission denied');
 			return;
 		}

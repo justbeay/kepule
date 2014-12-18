@@ -1,9 +1,9 @@
 define(function() {
-	return ["viewUserCtrl", ["$scope", "$scopeData", "$dict", "$location", "$http", "$common", "$restful",
-	function($scope, $scopeData, $dict, $location, $http, $common, $restful) {
+	return ["viewUserCtrl", ["$scope", "$rootScope", "$scopeData", "$dict", "$location", "$http", "$common", "$restful",
+	function($scope, $rootScope, $scopeData, $dict, $location, $http, $common, $restful) {
 		var id = $scopeData.get("id");
 
-		$scope.viewMore = id==$scope.loginInfo._loginId || $scope.loginInfo.loginRole=='9';
+		$scope.viewMore = id==$rootScope.loginInfo._loginId || $rootScope.loginInfo.loginRole=='9';
 		$scope.groupInfoList = [];
 		$restful.get("/api/group", function(data) {  //url request for production
 //		$restful.get("/test/todo/groupList.php", function(data) {  //url request for testing

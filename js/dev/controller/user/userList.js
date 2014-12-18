@@ -1,5 +1,6 @@
 define(function() {
-	return ["UserListCtrl", ["$scope", "$scopeData", "$dict", "$location", "$http", "$route", "$common", "$restful", function($scope, $scopeData, $dict, $location, $http, $route, $common, $restful) {
+	return ["UserListCtrl", ["$scope", "$rootScope", "$scopeData", "$dict", "$location", "$http", "$route", "$common", "$restful", 
+	function($scope, $rootScope, $scopeData, $dict, $location, $http, $route, $common, $restful) {
 		$scope.pageSize = 10;
 		$scope.pageCur = 1;
 		$scope.pageTotal = 1;
@@ -26,7 +27,7 @@ define(function() {
 			$location.path("viewUser");
 		};
 		$scope.delete = function(id) {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}

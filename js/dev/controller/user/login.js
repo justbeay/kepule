@@ -1,7 +1,7 @@
 define(["cryptojs-sha256"], function(crypto) {
-	return ["loginCtrl", ["$scope", "$location", "$config", "$http", "$cookies", "$remote", 
-	function($scope, $location, $config, $http, $cookies, $remote) {
-		if($scope.loginInfo.isLogin){
+	return ["loginCtrl", ["$scope", "$rootScope", "$location", "$config", "$http", "$cookies", "$remote", 
+	function($scope, $rootScope, $location, $config, $http, $cookies, $remote) {
+		if($rootScope.loginInfo.isLogin){
 			$location.path("todoList");
 		}
 		$scope.back = function() {
@@ -37,8 +37,8 @@ define(["cryptojs-sha256"], function(crypto) {
 		$scope.submit = function() {
 			var loginTime = new Date().getTime();
 			var password = crypto.SHA256($scope.password).toString();
-			password = crypto.HmacSHA256(password, $config.encrySeed).toString();
-			password = crypto.HmacSHA256(password, $scope.name+":"+loginTime).toString();
+			var encPassword = crypto.HmacSHA256(password, $config.encrySeed).toString();
+			password = crypto.HmacSHA256(encPassword, $scope.name+":"+loginTime).toString();
 			$scope.UserInfo = {
 				loginId: $scope.name,
 				password: password,
@@ -49,12 +49,13 @@ define(["cryptojs-sha256"], function(crypto) {
 				alert('用户登录成功');
 				$cookies.isLogin = true;
 				$cookies._loginId = data._id;
+				$cookies.loginId = $scope.name;
 				$cookies.loginRole = data.role;
-				$scope.loginInfo = $scope.loginInfo || {};
-				$scope.loginInfo.isLogin = true;
-				$scope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
+				$rootScope.loginInfo = $rootScope.loginInfo || {};
+				$rootScope.loginInfo.isLogin = true;
+				$rootScope.loginInfo.loginRole = !!$cookies.isLogin && !!$cookies._loginId && !!$cookies.loginRole 
 						? parseInt($cookies.loginRole) : -1;
-				$scope.loginInfo._loginId = data._id;
+				$rootScope.loginInfo._loginId = data._id;
 				$location.path('todoList');
 			});
 		};

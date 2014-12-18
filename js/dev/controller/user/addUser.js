@@ -1,5 +1,6 @@
 define(["cryptojs-sha256", "xlsx"], function(crypto, xlsx) {
-	return ["addUserCtrl", ["$scope", "$rootScope", "$config", "$dict", "$location", "$http", "$restful", "$common", function($scope, $rootScope, $config, $dict, $location, $http, $restful, $common) {
+	return ["addUserCtrl", ["$scope", "$rootScope", "$config", "$dict", "$location", "$http", "$restful", "$common", 
+	function($scope, $rootScope, $config, $dict, $location, $http, $restful, $common) {
 		$scope.groupInfoList = [];
 		$scope.userPositionInfoList = $dict.positionInfo;
 		$scope.userStatusInfoList = $dict.statusInfo;
@@ -225,7 +226,7 @@ define(["cryptojs-sha256", "xlsx"], function(crypto, xlsx) {
 			$location.path("userList");
 		};
 		$scope.submitViaFile = function() {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}
@@ -246,7 +247,7 @@ define(["cryptojs-sha256", "xlsx"], function(crypto, xlsx) {
 			}
 		};
 		$scope.submitViaInput = function() {
-			if($scope.loginInfo.loginRole != '9'){
+			if($rootScope.loginInfo.loginRole != '9'){
 				alert('Permission denied');
 				return;
 			}
