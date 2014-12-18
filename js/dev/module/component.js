@@ -559,6 +559,33 @@ define(["angular"], function(angular) {
 
 		}
 	})
+
+	.directive('ngSelectway', function() {
+		return function(scope,element,attrs) {
+			function showSelected(){
+				for(var i=0; i<element.get(0).options.length; i++){
+					var optionVal = element.get(0).options[i].value;
+					var selector = '.way_'+optionVal;
+					i==element.get(0).selectedIndex ? $(selector).show() : $(selector).hide();
+				}
+			}
+			showSelected();
+			element.bind('change', function(event){
+				showSelected();
+			});
+		}
+	})
+
+	.directive('ngSelectfile', function() {
+		return {
+			link: function(scope, element, attrs){
+				var name = attrs.ngSelectfile ? attrs.ngSelectfile : 'file';
+				element.bind("change", function(e){
+					scope[name] = (e.srcElement || e.target).files[0];
+				});
+			}
+		}
+	})
 	;
 });
 

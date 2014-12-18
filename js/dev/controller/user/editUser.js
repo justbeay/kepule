@@ -74,29 +74,29 @@ define(["cryptojs-sha256"], function(crypto) {
 				}
 			}
 		};
-		$scope.checkName = function() { return $common.mustInputCheck("姓名", $scope.name); };
-		$scope.checkStatus = function() { return $common.mustInputCheck("用户状态", $scope.status); };
-		$scope.checkEmail = function() { return $common.mustInputCheck("电子邮件地址", $scope.email, /^[a-zA-Z0-9_-]+@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/); };
-		$scope.checkGroup = function() { return $common.mustInputCheck("项目组", $scope.group); };
-		$scope.checkRole = function() { return $common.mustInputCheck("用户角色", $scope.role); };
-		$scope.checkPosition = function() { return $common.mustInputCheck("岗位", $scope.position); };
-		$scope.checkSex = function(){ return $common.mustInputCheck("性别", $scope.sex); }
-		$scope.checkIdNo = function(){ return $common.mustInputCheck("证件号", $scope.idNo); }
-		$scope.checkBirthday = function(){ return $common.mustInputCheck("生日", $scope.birthday); }
-		$scope.checkNativeplace = function(){ return $common.mustInputCheck("籍贯", $scope.nativeplace); }
-		$scope.checkResidenceType = function(){ return $common.mustInputCheck("户口性质", $scope.residenceType); }
-		$scope.checkNation = function(){ return $common.mustInputCheck("民族", $scope.nation); }
-		$scope.checkMarital = function(){ return $common.mustInputCheck("婚否", $scope.marital); }
-		$scope.checkPolitical = function(){ return $common.mustInputCheck("政治面貌", $scope.political); }
-		$scope.checkEducation = function(){ return $common.mustInputCheck("学历", $scope.education); }
-		$scope.checkGraduated = function(){ return $common.mustInputCheck("毕业院校", $scope.graduated); }
-		$scope.checkMajor = function(){ return $common.mustInputCheck("专业", $scope.major); }
-		$scope.checkGraduationTime = function(){ return $common.mustInputCheck("毕业时间", $scope.graduationTime); }
-		$scope.checkExperience = function(){ return $common.mustInputCheck("工作年限", $scope.experience); }
-		$scope.checkContractBeginDate = function(){ return $common.mustInputCheck("合同起始日期", $scope.contractBeginDate); }
-		$scope.checkContractEndDate = function(){ return $common.mustInputCheck("合同终止日期", $scope.contractEndDate); }
-		$scope.checkPhoneno = function(){ return $common.mustInputCheck("手机号码", $scope.phoneno); }
-		$scope.checkAddress = function(){ return $common.mustInputCheck("住址", $scope.address); }
+		$scope.checkName = function() { return $common.checkField("姓名", $scope.name, true); };
+		$scope.checkStatus = function() { return $common.checkField("用户状态", $scope.status, true); };
+		$scope.checkEmail = function() { return $common.checkField("电子邮件地址", $scope.email, true, /^[a-zA-Z0-9_-]+@[a-z0-9]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/); };
+		$scope.checkGroup = function() { return $common.checkField("项目组", $scope.group, true); };
+		$scope.checkRole = function() { return $common.checkField("用户角色", $scope.role, true); };
+		$scope.checkPosition = function() { return $common.checkField("岗位", $scope.position, true); };
+		$scope.checkSex = function(){ return $common.checkField("性别", $scope.sex); }
+		$scope.checkIdNo = function(){ return $common.checkField("证件号", $scope.idNo); }
+		$scope.checkBirthday = function(){ return $common.checkField("生日", $scope.birthday); }
+		$scope.checkNativeplace = function(){ return $common.checkField("籍贯", $scope.nativeplace); }
+		$scope.checkResidenceType = function(){ return $common.checkField("户口性质", $scope.residenceType); }
+		$scope.checkNation = function(){ return $common.checkField("民族", $scope.nation); }
+		$scope.checkMarital = function(){ return $common.checkField("婚否", $scope.marital); }
+		$scope.checkPolitical = function(){ return $common.checkField("政治面貌", $scope.political); }
+		$scope.checkEducation = function(){ return $common.checkField("学历", $scope.education); }
+		$scope.checkGraduated = function(){ return $common.checkField("毕业院校", $scope.graduated); }
+		$scope.checkMajor = function(){ return $common.checkField("专业", $scope.major); }
+		$scope.checkGraduationTime = function(){ return $common.checkField("毕业时间", $scope.graduationTime); }
+		$scope.checkExperience = function(){ return $common.checkField("工作年限", $scope.experience); }
+		$scope.checkContractBeginDate = function(){ return $common.checkField("合同起始日期", $scope.contractBeginDate); }
+		$scope.checkContractEndDate = function(){ return $common.checkField("合同终止日期", $scope.contractEndDate); }
+		$scope.checkPhoneno = function(){ return $common.checkField("手机号码", $scope.phoneno); }
+		$scope.checkAddress = function(){ return $common.checkField("住址", $scope.address); }
 		
 		$scope.back = function() {
 			$location.path("userList");

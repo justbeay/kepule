@@ -24,6 +24,7 @@
         "spin": "https://github.com/fgnass/spin.js.git",
         "es5": "https://github.com/es-shims/es5-shim.git",
         "json3": "https://github.com/bestiejs/json3.git",
-        "crypto": "https://github.com/evanvosberg/crypto-js.git"
+        "crypto": "https://github.com/evanvosberg/crypto-js.git",
+        "xlsx": "https://github.com/syhmosh/js-xlsx.git"
     }
 }

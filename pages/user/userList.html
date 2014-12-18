@@ -3,7 +3,7 @@
 		<div>
 			<h1 class="float-left">用户列表</h1>
 			<div class="header-right">
-				<button class="button" ng-click="add()">新增用户</button>
+				<button class="button" ng-show="loginInfo.loginRole=='9'" ng-click="add()">新增用户</button>
 			</div>
 		</div>
 		<table>
@@ -17,7 +17,8 @@
 			</tr>
 			</thead>
 			<tr ng-repeat="user in userList">
-				<td><a ng-click="view(user.id)">{{user.name}}</a></td>
+				<td ng-hide="loginInfo.isLogin">{{user.name}}</td>
+				<td ng-show="loginInfo.isLogin"><a ng-click="view(user.id)">{{user.name}}</a></td>
 				<td>{{user.group}}</td>
 				<td>{{user.position}}</td>
 				<td>{{user.status}}</td>

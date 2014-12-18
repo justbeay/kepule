@@ -11,12 +11,19 @@ define(["angular"], function(angular) {
 			return id;
 		}
 
-		function mustInputCheck(displayName, value, pattern){
-			if(!value) { 
-				return {
-					flag: "error", 
-					msg: displayName+"不能为空"
-				};
+		function checkField(displayName, value, noblank, pattern){
+			if(!value) {
+				if(noblank==true) {
+					return {
+						flag: "error", 
+						msg: displayName+"不能为空"
+					}
+				}else{
+					return {
+						flag: "tip",
+						msg: "请输入"+displayName
+					};
+				}
 			} else {
 				if(pattern && !value.trim().match(pattern)){
 					return {
@@ -32,9 +39,18 @@ define(["angular"], function(angular) {
 			}
 		}
 
+		function parseToDate(str, format){
+			var d = new Date();
+			var t = Date.parse(str, format);
+			if(isNaN(t)) return null;
+			d.setTime(t);
+			return d;
+		}
+
 		return {
 			getTranslation: getTranslation,
-			mustInputCheck: mustInputCheck
+			checkField: checkField,
+			parseToDate: parseToDate
 		};
 	});
 });

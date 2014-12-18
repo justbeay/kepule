@@ -62,8 +62,8 @@ define(function() {
 				}
 			}
 			if($scopeData.get('isSearch')){
-				$restful.post("/todoBiz/list", $scope.SearchInfo, function(data) {  //url request for production
-//				$restful.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
+				$remote.post("/todoBiz/list", $scope.SearchInfo, function(data) {  //url request for production
+//				$remote.post("/test/todo/todoList.php", $scope.SearchInfo, function(data) {  //url request for testing
 					dealQueryResult(data);
 				});
 			}else{

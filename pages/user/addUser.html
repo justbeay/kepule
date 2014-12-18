@@ -1,7 +1,44 @@
 <div class="bodyer odd">
 	<div class="container">
 		<h1>新增用户</h1>
-		<form name="form" novalidate>
+		<div class="trans-table">
+			<div class="trans-line">
+				<div class="col-md-2">
+					<div class="trans-label">请选择输入方式</div>
+				</div>
+				<div class="col-md-10">
+					<div class="trans-ele">
+						<select name="way" class="input-select" ng-selectway="test">
+							<option value="1" selected="true">通过excel批量上传</option>
+							<option value="2">手动输入</option>
+						</select>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<form name="form1" class="way_1" novalidate>
+			<div class="wrapper">
+				<div class="trans-table">
+					<div class="trans-line way_1">
+						<div class="col-md-2">
+							<div class="trans-label">excel文件</div>
+						</div>
+						<div class="col-md-10">
+							<div class="trans-ele">
+								<input type="file" class="input-text" name="uploadFile" ng-model="uploadFile" ng-chk="checkUploadFile" formname="form1" ng-selectfile="uploadFile">
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="trans-line textCenter">
+						<div class="button" ng-sub="submitViaFile()" formname="form1">提  交</div>
+						<div class="button" ng-click="back()" formname="form1">返  回</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<form name="form2" class="way_2" novalidate>
 			<div class="wrapper">
 				<div class="trans-table">
 					<div class="trans-line">
@@ -10,7 +47,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="loginId" ng-model="loginId" ng-chk="checkLoginId" formname="form" placeholder="登录名">
+								<input type="text" class="input-text" name="loginId" ng-model="loginId" ng-chk="checkLoginId" formname="form2" placeholder="登录名">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -21,7 +58,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" formname="form" placeholder="姓名">
+								<input type="text" class="input-text" name="name" ng-model="name" ng-chk="checkName" formname="form2" placeholder="姓名">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -32,7 +69,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="password" class="input-text" name="password" ng-model="password" ng-chk="checkPassword" formname="form" placeholder="密码">
+								<input type="password" class="input-text" name="password" ng-model="password" ng-chk="checkPassword" formname="form2" placeholder="密码">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -43,7 +80,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="password" class="input-text" name="passwordAgain" ng-model="passwordAgain" ng-chk="checkPasswordAgain" formname="form" placeholder="重复密码">
+								<input type="password" class="input-text" name="passwordAgain" ng-model="passwordAgain" ng-chk="checkPasswordAgain" formname="form2" placeholder="重复密码">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -54,7 +91,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="status" ng-model="status" ng-chk="checkStatus" formname="form">
+								<select class="input-select" name="status" ng-model="status" ng-chk="checkStatus" formname="form2">
 									<option ng-repeat="statusInfo in userStatusInfoList" value="{{statusInfo.id}}">{{statusInfo.name}}</option>
 								</select>
 							</div>
@@ -67,7 +104,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="email" ng-model="email" ng-chk="checkEmail" formname="form" placeholder="电子邮件">
+								<input type="text" class="input-text" name="email" ng-model="email" ng-chk="checkEmail" formname="form2" placeholder="电子邮件">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -78,7 +115,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="sex" ng-model="sex" ng-chk="checkSex" formname="form">
+								<select class="input-select" name="sex" ng-model="sex" ng-chk="checkSex" formname="form2">
 									<option ng-repeat="sexInfo in userSexInfoList" value="{{sexInfo.id}}">{{sexInfo.name}}</option>
 								</select>
 							</div>
@@ -91,7 +128,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="idNo" ng-model="idNo" ng-chk="checkIdNo" formname="form" placeholder="证件号">
+								<input type="text" class="input-text" name="idNo" ng-model="idNo" ng-chk="checkIdNo" formname="form2" placeholder="证件号">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -102,7 +139,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="date" class="input-text" name="birthday" ng-model="birthday" ng-chk="checkBirthday" formname="form" placeholder="生日">
+								<input type="date" class="input-text" name="birthday" ng-model="birthday" ng-chk="checkBirthday" formname="form2" placeholder="生日">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -113,7 +150,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="nativeplace" ng-model="nativeplace" ng-chk="checkNativeplace" formname="form" placeholder="籍贯">
+								<input type="text" class="input-text" name="nativeplace" ng-model="nativeplace" ng-chk="checkNativeplace" formname="form2" placeholder="籍贯">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -124,7 +161,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="residenceType" ng-model="residenceType" ng-chk="checkResidenceType" formname="form">
+								<select class="input-select" name="residenceType" ng-model="residenceType" ng-chk="checkResidenceType" formname="form2">
 									<option ng-repeat="residenceTypeInfo in userResidenceTypeInfoList" value="{{residenceTypeInfo.id}}">{{residenceTypeInfo.name}}</option>
 								</select>
 							</div>
@@ -137,7 +174,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="nation" ng-model="nation" ng-chk="checkNation" formname="form" placeholder="民族">
+								<input type="text" class="input-text" name="nation" ng-model="nation" ng-chk="checkNation" formname="form2" placeholder="民族">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -148,7 +185,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="marital" ng-model="marital" ng-chk="checkMarital" formname="form">
+								<select class="input-select" name="marital" ng-model="marital" ng-chk="checkMarital" formname="form2">
 									<option value="true">已婚</option>
 									<option value="false">未婚</option>
 								</select>
@@ -162,7 +199,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="political" ng-model="political" ng-chk="checkPolitical" formname="form" placeholder="政治面貌">
+								<input type="text" class="input-text" name="political" ng-model="political" ng-chk="checkPolitical" formname="form2" placeholder="政治面貌">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -173,7 +210,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="education" ng-model="education" ng-chk="checkEducation" formname="form" placeholder="学历">
+								<input type="text" class="input-text" name="education" ng-model="education" ng-chk="checkEducation" formname="form2" placeholder="学历">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -184,7 +221,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="graduated" ng-model="graduated" ng-chk="checkGraduated" formname="form" placeholder="毕业院校">
+								<input type="text" class="input-text" name="graduated" ng-model="graduated" ng-chk="checkGraduated" formname="form2" placeholder="毕业院校">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -195,7 +232,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="major" ng-model="major" ng-chk="checkMajor" formname="form" placeholder="专业">
+								<input type="text" class="input-text" name="major" ng-model="major" ng-chk="checkMajor" formname="form2" placeholder="专业">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -206,7 +243,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="graduationTime" ng-model="graduationTime" ng-chk="checkGraduationTime" formname="form" placeholder="毕业时间">
+								<input type="text" class="input-text" name="graduationTime" ng-model="graduationTime" ng-chk="checkGraduationTime" formname="form2" placeholder="毕业时间">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -217,7 +254,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="experience" ng-model="experience" ng-chk="checkExperience" formname="form" placeholder="工作年限">
+								<input type="text" class="input-text" name="experience" ng-model="experience" ng-chk="checkExperience" formname="form2" placeholder="工作年限">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -228,7 +265,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="date" class="input-text" name="contractBeginDate" ng-model="contractBeginDate" ng-chk="checkContractBeginDate" formname="form" placeholder="合同起始日期">
+								<input type="date" class="input-text" name="contractBeginDate" ng-model="contractBeginDate" ng-chk="checkContractBeginDate" formname="form2" placeholder="合同起始日期">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -239,7 +276,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="date" class="input-text" name="contractEndDate" ng-model="contractEndDate" ng-chk="checkContractEndDate" formname="form" placeholder="合同终止日期">
+								<input type="date" class="input-text" name="contractEndDate" ng-model="contractEndDate" ng-chk="checkContractEndDate" formname="form2" placeholder="合同终止日期">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -250,7 +287,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="phoneno" ng-model="phoneno" ng-chk="checkPhoneno" formname="form" placeholder="手机号码">
+								<input type="text" class="input-text" name="phoneno" ng-model="phoneno" ng-chk="checkPhoneno" formname="form2" placeholder="手机号码">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -261,7 +298,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<input type="text" class="input-text" name="address" ng-model="address" ng-chk="checkAddress" formname="form" placeholder="住址">
+								<input type="text" class="input-text" name="address" ng-model="address" ng-chk="checkAddress" formname="form2" placeholder="住址">
 							</div>
 						</div>
 						<div class="clear"></div>
@@ -272,7 +309,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="group" ng-model="group" ng-chk="checkGroup" formname="form">
+								<select class="input-select" name="group" ng-model="group" ng-chk="checkGroup" formname="form2">
 									<option ng-repeat="groupInfo in groupInfoList" value="{{groupInfo.id}}">{{groupInfo.name}}</option>
 								</select>
 							</div>
@@ -285,7 +322,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="role" ng-model="role" ng-chk="checkRole" formname="form">
+								<select class="input-select" name="role" ng-model="role" ng-chk="checkRole" formname="form2">
 									<option ng-repeat="roleInfo in userRoleInfoList" value="{{roleInfo.id}}">{{roleInfo.name}}</option>
 								</select>
 							</div>
@@ -298,7 +335,7 @@
 						</div>
 						<div class="col-md-10">
 							<div class="trans-ele">
-								<select class="input-select" name="position" ng-model="position" ng-chk="checkPosition" formname="form">
+								<select class="input-select" name="position" ng-model="position" ng-chk="checkPosition" formname="form2">
 									<option ng-repeat="positionInfo in userPositionInfoList" value="{{positionInfo.id}}">{{positionInfo.name}}</option>
 								</select>
 							</div>
@@ -306,8 +343,8 @@
 						<div class="clear"></div>
 					</div>
 					<div class="trans-line textCenter">
-						<div class="button" ng-sub="submit()" formname="form">提  交</div>
-						<div class="button" ng-click="back()" formname="form">返  回</div>
+						<div class="button" ng-sub="submitViaInput()" formname="form2">提  交</div>
+						<div class="button" ng-click="back()" formname="form2">返  回</div>
 					</div>
 				</div>
 			</div>

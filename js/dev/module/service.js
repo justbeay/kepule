@@ -47,32 +47,29 @@ define(["angular", "config"], function(angular) {
 	})
 	
 	.factory("$remote", ["$config", "$http", function($config, $http) {
-		/** 返回校验 **/
-		function returnCheck(data) {
-			if(data.error && data.error.msg){
-				alert(data.error.msg);
-				return false;
+		function dealError(errorCallback, data, status, headers, config){
+			if(status == 400 && typeof errorCallback != "function"){
+				alert(data);
+    		}else if(typeof errorCallback == "function"){
+				errorCallback(data, status, headers, config);
 			}
-			return true;
-		};
-		
-		function get(url, callback){
-	    	return $http.get(url).success(function(data ,status, headers, config){
-	    		if(returnCheck(data)){
-		    		if(typeof callback == "function"){
-		    			callback(data, status, headers, config);
-		    		}
-		    	}
+		}
+		function get(url, successCallback, errorCallback){
+	    	return $http.get(url).success(function(data, status, headers, config){
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 	    };
-	    
-		function post(url, requestData, callback) {
-			return $http.post(url, requestData).success(function(data ,status, headers, config){
-	    		if(returnCheck(data)){
-		    		if(typeof callback == "function"){
-		    			callback(data, status, headers, config);
-		    		}
-		    	}
+		function post(url, requestData, successCallback, errorCallback) {
+			return $http.post(url, requestData).success(function(data, status, headers, config){
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 		};
 		
@@ -83,49 +80,51 @@ define(["angular", "config"], function(angular) {
 	}])
 
 	.factory("$restful", ["$config", "$http", function($config, $http) {
-		function dealErrorHttpRequest(data ,status, headers, config){
-			if(status == 400){
-    			alert('permission denied');
-    		}
+		function dealError(errorCallback, data, status, headers, config){
+			if(status == 400 && typeof errorCallback != "function"){
+				alert(data);
+    		}else if(typeof errorCallback == "function"){
+				errorCallback(data, status, headers, config);
+			}
 		}
 
-		function get(url, callback){
+		function get(url, successCallback, errorCallback){
 	    	return $http.get(url).success(function(data ,status, headers, config){
-	    		if(typeof callback == "function"){
-	    			callback(data, status, headers, config);
-		    	}
-	    	}).error(function(data, status){ 
-	    		dealErrorHttpRequest(data, status); 
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 	    }
 	    
-		function post(url, requestData, callback) {
+		function post(url, requestData, successCallback, errorCallback) {
 			return $http.post(url, requestData).success(function(data ,status, headers, config){
-	    		if(typeof callback == "function"){
-	    			callback(data, status, headers, config);
-		    	}
-	    	}).error(function(data, status){ 
-	    		dealErrorHttpRequest(data, status); 
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 		}
 	    
-		function put(url, requestData, callback) {
+		function put(url, requestData, successCallback, errorCallback) {
 			return $http.put(url, requestData).success(function(data ,status, headers, config){
-	    		if(typeof callback == "function"){
-	    			callback(data, status, headers, config);
-		    	}
-	    	}).error(function(data, status){ 
-	    		dealErrorHttpRequest(data, status); 
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 		}
 	    
-		function del(url, callback) {
+		function del(url, successCallback, errorCallback) {
 			return $http.put(url).success(function(data ,status, headers, config){
-	    		if(typeof callback == "function"){
-	    			callback(data, status, headers, config);
-		    	}
-	    	}).error(function(data, status){ 
-	    		dealErrorHttpRequest(data, status); 
+	    		if(typeof successCallback == "function"){
+	    			successCallback(data, status, headers, config);
+	    		}
+	    	}).error(function(data, status, headers, config){
+	    		dealError(errorCallback, data, status, headers, config);
 	    	});
 		}
 		
