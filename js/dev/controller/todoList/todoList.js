@@ -1,4 +1,4 @@
-define(function() {
+﻿define(function() {
 	return ["TodoListCtrl", ["$scope", "$rootScope", "$scopeData", "$location", "$http", "$route", "$restful", 
 	function($scope, $rootScope, $scopeData, $location, $http, $route, $restful) {
 		$scope.pageSize = 10;
@@ -40,7 +40,11 @@ define(function() {
 			$restful.put("/api/todo/"+id, $scope.TodoInfo, function(data) {  //url request for production
 //			$restful.post("/test/todo/editTodoInfo.php?id="+id, $scope.TodoInfo, function(data) {  //url request for testing
 				alert('任务更新成功');
-				$location.path('todoList');
+				for(var i=0; i<$scope.todoList.length; i++){
+					if($scope.todoList[i].id == id){
+						$scope.todoList[i].done = isDone;
+					}
+				}
 			});
 		};
 		$scope.query = function(pageno){
